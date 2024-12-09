@@ -53,9 +53,11 @@ public class Controlador implements ActionListener, MouseListener {
 	private ObjectMapper mapper ;
 	private List<Metrica>metricas ;
 	private ArrayList <String> nombres ;
+	private ArrayList <String> contenidos;
 	private ArrayList <String> idNombres;
+	private ArrayList <String> colabs;
 	private DefaultComboBoxModel<String> modelocombo;
-	private String id;
+	private String id, plataformanombre;
 
 
 	
@@ -64,11 +66,14 @@ public class Controlador implements ActionListener, MouseListener {
 		this.vista = frame;
 		this.idNombres = new ArrayList<String>();
 		this.nombres = new ArrayList<String> ();
+		this.contenidos = new ArrayList<String> ();
+		this.colabs = new ArrayList<String>();
 		this.metricas = abrirCSV("files\\metricas_contenido.csv");
 		this.mapper = new ObjectMapper();
 		
 		crearJson();
 		crearArrayComboBox();
+		cargarContenido();
 		//BOTONES GENERALES
 		this.vista.btnDatos.addActionListener(this);
 		this.vista.btnColaboraciones.addActionListener(this);
@@ -99,15 +104,14 @@ public class Controlador implements ActionListener, MouseListener {
 		this.vista.btnBorrarDatosPubli.addActionListener(this);
 		this.vista.btnInsertarModif.addActionListener(this);
 		this.vista.btnBorrarDatosModif.addActionListener(this);
-		
+				
 		//PANEL METRICAS
 		this.vista.btnMetricasRendimientoMetrica.addActionListener(this);
 		this.vista.btnCrearInformeMetrica.addActionListener(this);
 		this.vista.btnResumenRendimientoMetrica.addActionListener(this);
 		this.vista.btnVolverMetrica.addActionListener(this);
-		
-		//ESCONDER PANELES
-		
+				
+		//ESCONDER PANELES		
 		this.vista.panelColaboraciones.setVisible(false);
 		this.vista.panelPublicaciones.setVisible(false);
 		this.vista.panelMetricas.setVisible(false);
@@ -116,6 +120,8 @@ public class Controlador implements ActionListener, MouseListener {
 		cargarComboBox(vista.CBColaboraciones, nombres);
 		cargarComboBox(vista.cbAnfitrion, idNombres);
 		cargarComboBox(vista.cbInvitado, idNombres);
+		cargarComboBox(vista.cbContenidoModif, contenidos);
+		
 
 		
 	}
@@ -164,7 +170,7 @@ public class Controlador implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 
 	
 	
@@ -175,34 +181,30 @@ public class Controlador implements ActionListener, MouseListener {
         vista.comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el elemento seleccionado
+            	colabs.clear();
                 String seleccion = (String) vista.comboBox.getSelectedItem();
                 
                 sacarID(seleccion);
-                recorrerDatos(creadoresNode, id);
+                recorrerDatos();
+            	rellenarcolab();
+                cargarComboBox(vista.CBColaboraciones, colabs);
                 
                 // Actualizar la etiqueta con la selección
-                vista.lblNombreMostrar.setText(seleccion);
                 System.out.println(id);
-                // Aquí puedes añadir la acción que desees realizar
             }
         });
         
         vista.CBColaboraciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+                String seleccion = (String) vista.CBColaboraciones.getSelectedItem();
+                rellenarcamposcolab(seleccion);
 
-                // Obtener el elemento seleccionado
-                String seleccion = (String) vista.comboBox.getSelectedItem();
+            	
                 
-                sacarID(seleccion);
-                //recorrerDatos(creadoresNode, id);´
-                recorrerColaboradores(creadoresNode, seleccion);
                 
-                // Actualizar la etiqueta con la selección
-                //vista.lblNombreMostrar.setText(seleccion);
                 System.out.println(id);
-                // Aquí puedes añadir la acción que desees realizar
             }
         });
 
@@ -253,21 +255,31 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelMetricas.enable(true);
       		}
       		
+      		
       		//------------------------------------BOTON YOUTUBE-----------------------------------------------
       		if(e.getSource()==vista.btnYouTube) {
       			vista.lblDatosPlataforma.setText("DATOS DE YOUTUBE");
+      			plataformanombre = "YouTube";
+      			rellenarCamposPlataforma();
+
       		}
       		//------------------------------------BOTON TWITCH------------------------------------------------
       		if(e.getSource()==vista.btnTwitch) {
       			vista.lblDatosPlataforma.setText("DATOS DE TWITCH");
+      			plataformanombre = "Twitch";
+      			rellenarCamposPlataforma();
       		}
       		//------------------------------------BOTON INSTAGRAM---------------------------------------------
       		if(e.getSource()==vista.btnInstagram) {
       			vista.lblDatosPlataforma.setText("DATOS DE INSTAGRAM");
+      			plataformanombre = "Instagram";
+      			rellenarCamposPlataforma();
       		}
       		//------------------------------------BOTON TIKTOK------------------------------------------------
       		if(e.getSource()==vista.btnTikTok) {
       			vista.lblDatosPlataforma.setText("DATOS DE TIKTOK");
+      			plataformanombre = "TikTok";
+      			rellenarCamposPlataforma();
       		}
       		
       		//-------------------------- DATOS GENERALES----------------------------
@@ -283,6 +295,8 @@ public class Controlador implements ActionListener, MouseListener {
       				vista.lblMsgCorrecto.setText("UNO O VARIOS CAMPOS SON INCORRECTOS");
       				vista.lblMsgCorrecto.setForeground(new Color(255,0,0));
       				temporizador();
+      				
+      				
       			}else{
       				vista.tfTipo.setText("");
       				vista.tfTematica.setText("");
@@ -290,6 +304,8 @@ public class Controlador implements ActionListener, MouseListener {
       				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
       				vista.lblMsgCorrecto.setText("COLABORACION CREADA CORRECTAMENTE");
       				temporizador();
+      				insercion();
+
       			}
       			
       		}
@@ -309,13 +325,23 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.lblMsgCorrecto.setVisible(true);
       			vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
       			temporizador();
+      			try {
+					colaboradorestoJson();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
       		}
       		if(e.getSource()==vista.btnReporteColab) {
+      			
+      			colaboracionestoCSV();
+      			reporteColaboraciontoCSV();
       			vista.lblMsgCorrecto.setText("REPORTE REALIZADO CORRECTAMENTE");
       			vista.lblMsgCorrecto.setVisible(true);
       			vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
       			temporizador();
       		}
+      		
       		
       		//-----------------------PUBLICACIONES-------------------------------------------
       		//-------------------------- PANEL AÑADIR PUBLICACIONES-----------------
@@ -341,6 +367,7 @@ public class Controlador implements ActionListener, MouseListener {
       				vista.tfPubliFechaInsert.setText("");
       				vista.tfPubliIdCreadorInsert.setText("");
       				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+      				addMetricas();
       				vista.lblMsgCorrecto.setText("PUBLICACION CREADA CORRECTAMENTE");
       				temporizador();
       			}
@@ -352,10 +379,30 @@ public class Controlador implements ActionListener, MouseListener {
       		
       		//BOTONES MODIFICAR PUBLI
       		if(e.getSource()==vista.btnModificarPubli) {
+      			
       			vista.panelModificarPubli.setVisible(true);
       			vista.panelBotonesPublis.setVisible(false);
       			vista.btnVolverPubli.setVisible(true);
       		}
+      		if (e.getSource()==vista.btnInsertarModif) {
+      			if ((vista.tfMGModif.getText().equals("")) || vista.tfComentariosModif.getText().equals("")){
+      				vista.lblMsgCorrecto.setText("UNO O VARIOS CAMPOS SON INCORRECTOS");
+      				vista.lblMsgCorrecto.setForeground(new Color(255,0,0));
+      				temporizador();
+      			}else {
+      				vista.tfPubliFechaInsert.setText("");
+      				vista.tfPubliIdCreadorInsert.setText("");
+      				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+      				modMetricas();
+      				vista.lblMsgCorrecto.setText("PUBLICACION MODIFICADA CORRECTAMENTE");
+      				temporizador();
+      			}
+      		}
+      		
+      		if (e.getSource()==vista.btnBorrarDatosModif) {
+      			
+      		}
+
       		
       		//BOTONES ELIMINAR PUBLI
       		if(e.getSource()==vista.btnEliminarPubli) {
@@ -363,7 +410,7 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelBotonesPublis.setVisible(false);
       			vista.btnVolverPubli.setVisible(true);
       		}
-      		
+
       		//-------------METRICAS-------------
       		//BOTONES PANEL BOTONES
       		if(e.getSource()==vista.btnVolverMetrica) {
@@ -376,7 +423,42 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.btnVolverMetrica.setVisible(true);
       			vista.panelAnalisisMetricas.setVisible(true);
       		}
+      		if (e.getSource()==vista.btnCrearInformeMetrica) {
+      			try {
+					generarJson();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+      		}
+      		if(e.getSource()== vista.btnResumenRendimientoMetrica) {
+      			try {
+					resumenRendimiento();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+      		}
+	
 	}
+	
+	
+	
+	public void rellenarCamposPlataforma () {
+		for (JsonNode creador : creadoresNode) {
+			if (creador.get("id").asText().equals(id)) {
+				for (JsonNode plataforma : creador.get("plataformas")) {
+					if (plataforma.get("nombre").asText().equalsIgnoreCase(plataformanombre)) {
+						this.vista.lblUsuarioMostrar.setText(plataforma.get("usuario").asText());
+						this.vista.lblSeguidoresMostrar.setText(plataforma.get("seguidores").asText());
+						this.vista.lblFCreacionMostrar.setText(plataforma.get("fecha_creacion").asText().toString());
+					}
+				}
+			}
+		}
+
+	}
+
 
 
 
@@ -396,6 +478,99 @@ public class Controlador implements ActionListener, MouseListener {
 		//idNombres = aplicacion.crearArrayComboBox(creadoresNode, idNombres);
 		//System.out.println(aplicacion.sacarID(idNombres));
 
+	
+	public void rellenarcamposcolab(String eleccion) {
+
+		String texto = eleccion;
+		String[] partes = texto.split("-");
+		
+		String nombre = partes[0].trim(); 
+		String tematica = partes[1].trim(); 
+		
+
+		for (JsonNode creador : creadoresNode) {
+				if (creador.get("id").asText().equals(id)) {
+					for (JsonNode colaboracion : creador.get("colaboraciones")){
+						if (colaboracion.get("colaborador").asText().equalsIgnoreCase(nombre) &&colaboracion.get("tematica").asText().equalsIgnoreCase(tematica));
+						this.vista.lblColaboradorMostrar.setText((colaboracion.get("colaborador").asText()));
+						this.vista.lblTematicaColabMostrar.setText(colaboracion.get("tematica").asText());
+						this.vista.lblTipoMostrar.setText(colaboracion.get("tipo").asText());
+						this.vista.lblEstadoMostrar.setText(colaboracion.get("estado").asText());
+						
+						System.out.println();
+						System.out.println(colaboracion.get("tipo").asText());
+						System.out.println(colaboracion.get("estado"));
+					}
+					System.out.println("-----------------");
+				}
+		}
+		
+	}
+	
+	
+	
+	public void resumenRendimiento () throws JsonGenerationException, JsonMappingException, IOException {
+		ArrayNode colaboradores = mapper.createArrayNode();
+		int sumavistasYt=0, interaccionesYt=0, sumavistasTw=0, sumavistasIg=0, sumavistasTk=0, interaccionesIg=0, interaccionesTk=0, interaccionesTw=0;
+		double promedioYt=0.0, promedioTk=0.0, promedioIg=0.0, promedioTw=0.0;
+		for (JsonNode creador : creadoresNode) {
+			ObjectNode colaborador = mapper.createObjectNode();
+			System.out.println(creador.get("id").asInt());
+			colaborador.put("id", creador.get("id").asInt());
+			for(int i=0; i<metricas.size();i++) {
+				if (creador.get("id").asInt() == metricas.get(i).getCreador_id()){
+					if (metricas.get(i).getPlataforma().equalsIgnoreCase("Youtube") && (metricas.get(i).getFecha().split("-")[0].equalsIgnoreCase("2023"))) {
+						sumavistasYt = sumavistasYt + metricas.get(i).getVistas();
+						interaccionesYt = (metricas.get(i).getComentarios()+metricas.get(i).getCompartidos()+metricas.get(i).getMe_gusta()+metricas.get(i).getVistas());
+						promedioYt++;
+					}else if (metricas.get(i).getPlataforma().equalsIgnoreCase("Instagram") && (metricas.get(i).getFecha().split("-")[0].equalsIgnoreCase("2023"))) {
+						sumavistasIg = sumavistasIg + metricas.get(i).getVistas();
+						interaccionesIg = (metricas.get(i).getComentarios()+metricas.get(i).getCompartidos()+metricas.get(i).getMe_gusta()+metricas.get(i).getVistas());
+						promedioIg++;
+					}else if(metricas.get(i).getPlataforma().equalsIgnoreCase("TikTok") && (metricas.get(i).getFecha().split("-")[0].equalsIgnoreCase("2023"))) {
+						sumavistasTk = sumavistasYt + metricas.get(i).getVistas();
+						interaccionesTk = (metricas.get(i).getComentarios()+metricas.get(i).getCompartidos()+metricas.get(i).getMe_gusta()+metricas.get(i).getVistas());
+						promedioTk++;
+					}else {
+						sumavistasTw = sumavistasTw + metricas.get(i).getVistas();
+						interaccionesTw = (metricas.get(i).getComentarios()+metricas.get(i).getCompartidos()+metricas.get(i).getMe_gusta()+metricas.get(i).getVistas());
+						promedioTw++;
+					}
+					
+					if (sumavistasIg>sumavistasTk && sumavistasIg>sumavistasYt && sumavistasIg>sumavistasTw) {
+						colaborador.put("Plataforma_mas_vista_2023", "Instagram");
+					}else if (sumavistasTk>sumavistasIg && sumavistasTk>sumavistasYt && sumavistasTk>sumavistasTw) {
+						colaborador.put("Plataforma_mas_vista_2023", "TikTok");
+					}else if (sumavistasTw>sumavistasTk && sumavistasTw>sumavistasYt && sumavistasTw>sumavistasIg) {
+						colaborador.put("Plataforma_mas_vista_2023", "Twitch");
+					}else {
+						colaborador.put("Plataforma_mas_vista_2023", "Youtube");
+					}
+					
+					if((interaccionesIg/promedioIg)>(interaccionesTk/promedioTk) && (interaccionesIg/promedioIg)>(interaccionesTk/promedioTk)&& (interaccionesIg/promedioIg)>(interaccionesTk/promedioTk)) {
+						colaborador.put("Plataforma_mas_interacciones_2023", "Instagram");
+					}else if ((interaccionesTk/promedioTk)>(interaccionesIg/promedioIg) && (interaccionesTk/promedioTk)>(interaccionesYt/promedioYt)&& (interaccionesTk/promedioTk)>(interaccionesTw/promedioTw)) {
+						colaborador.put("Plataforma_mas_interacciones_2023", "Youtube");
+					}else if((interaccionesTw/promedioTw)>(interaccionesTk/promedioTk) && (interaccionesTw/promedioTw)>(interaccionesYt/promedioYt)&& (interaccionesTw/promedioTw)>(interaccionesIg/promedioIg)) {
+						colaborador.put("Plataforma_mas_interacciones_2023", "Youtube");
+					}else {
+						colaborador.put("Plataforma_mas_interacciones_2023", "Youtube");
+					}
+					
+				}
+
+			}
+			colaboradores.add(colaborador);
+		}
+		
+		mapper.writeValue(new File ("files/resumen_rendimientos.json"), colaboradores);
+
+
+	}
+	
+	
+	
+	
 	
 	
 	public void sacarID (String seleccion) {
@@ -420,23 +595,27 @@ public class Controlador implements ActionListener, MouseListener {
 
 			}
 		}
-		
-		
-		
-		
+
+	}
+	
+	public void cargarContenido() {
+		for (int i=0; i<metricas.size();i++) {
+			String contenido = metricas.get(i).getContenido();
+			contenidos.add(contenido);
+		}
 	}
 	
 	
 	
 	
-	public void colaboradorestoJson (ObjectMapper mapper, ArrayNode creadoresNode) throws JsonGenerationException, JsonMappingException, IOException {
+	public void colaboradorestoJson () throws JsonGenerationException, JsonMappingException, IOException {
 		ArrayNode colaboradores = mapper.createArrayNode();
-		ArrayNode datos_colaboraciones = mapper.createArrayNode();
 		
 		for (JsonNode creador : creadoresNode) {
 			ObjectNode colaborador = mapper.createObjectNode();
 			System.out.println(creador.get("id").asInt());
 			colaborador.put("id", creador.get("id").asInt());
+			ArrayNode datos_colaboraciones = mapper.createArrayNode();
 			for (JsonNode colaboracion : creador.get("colaboraciones")) {
 				ObjectNode datos_colaboracion = mapper.createObjectNode();
 				datos_colaboracion.put("colaborador", colaboracion.get("colaborador").asText());
@@ -476,7 +655,7 @@ public class Controlador implements ActionListener, MouseListener {
 		
 	}
 
-	public void reporteColaboraciontoCSV (ArrayNode creadoresNode) {
+	public void reporteColaboraciontoCSV () {
 		String colaborador = null, fecha_inicio = null, fecha_fin = null;
 		int id = 0;
 		List<Colaboracion> colaboraciones = new ArrayList<>();
@@ -500,7 +679,7 @@ public class Controlador implements ActionListener, MouseListener {
 		crearCSVColaboracion(colaboraciones, "files\\reporte_colaboraciones.csv");
 	}
 	
-	public void generarJson (ArrayNode creadoresNode, ObjectMapper mapper) throws JsonGenerationException, JsonMappingException, IOException {
+	public void generarJson () throws JsonGenerationException, JsonMappingException, IOException {
 		int interaccionesYT=0, interaccionesIG=0, interaccionesTW=0, interaccionesTK=0;
 		double mediaYT=0.0, mediaTK=0.0, mediaIG=0.0, mediaTW=0.0;
 		ArrayNode reportes = mapper.createArrayNode();
@@ -586,7 +765,7 @@ public class Controlador implements ActionListener, MouseListener {
 	
 	
 	
-	public void calculoMedias(List<Metrica> metricas) {
+	public void calculoMedias() {
 		String id = "5";
 		Double mediaIG=0.0, vistasIG=0.0, megustaIG=0.0;
 		Double mediaYT=0.0, vistasYT=0.0, megustaYT=0.0;
@@ -636,24 +815,17 @@ public class Controlador implements ActionListener, MouseListener {
 	}
 	
 	
-	public void recorrerDatos (ArrayNode creadoresNode, String id) {
+	public void recorrerDatos () {
 
 		for (JsonNode creador : creadoresNode) {
 				if (creador.get("id").asText().equals(id)) {
-					System.out.println(creador.get("nombre").asText());
-					this.vista.lblNombreMostrar.setText(creador.get("nombre").asText());;
-					System.out.println(creador.get("pais").asText());
+					this.vista.lblNombreMostrar.setText(creador.get("nombre").asText());
 					this.vista.lblPaisMostrar.setText(creador.get("pais").asText());
-					System.out.println(creador.get("tematica").asText());
 					this.vista.lblTematicaMostrar.setText(creador.get("tematica").asText());
-					System.out.println(creador.get("seguidores_totales").asText());
 					this.vista.lblSeguidoresTotalesMostrar.setText(creador.get("seguidores_totales").asText());
 					JsonNode estadisticas = creador.get("estadisticas");
-					System.out.println(estadisticas.get("interacciones_totales").asText());
 					this.vista.lblInteraccionesTotalesMostrar.setText(estadisticas.get("interacciones_totales").asText());
-					System.out.println(estadisticas.get("promedio_vistas_mensuales").asText());
 					this.vista.lblPromedioVistasMensualesMostrar.setText(estadisticas.get("promedio_vistas_mensuales").asText());
-					System.out.println(estadisticas.get("tasa_crecimiento_seguidores").asText());
 					this.vista.lblTasaCrecimientoSeguidoresMostrar.setText(estadisticas.get("tasa_crecimiento_seguidores").asText());
 					for (JsonNode plataforma : creador.get("plataformas")) {
 						System.out.println(plataforma.get("nombre").asText());
@@ -681,39 +853,38 @@ public class Controlador implements ActionListener, MouseListener {
 	
 	
 	
-	public void insercion (ArrayNode creadoresNode, List<Metrica> metricas, ObjectMapper mapper) {
-		String id = "2";
-		String id2 = "6";
+	public void insercion () {
+		String id = this.vista.cbAnfitrion.getSelectedItem().toString().split(" ")[0];
+		String id2 = this.vista.cbInvitado.getSelectedItem().toString().split(" ")[0];
 		ObjectNode colaboracionNueva = mapper.createObjectNode();
+		
 
 		for (JsonNode creador : creadoresNode) {
 			if (creador.get("id").asText().equalsIgnoreCase(id)) {
-					colaboracionNueva.put("colaborador", "juanjo");
-					colaboracionNueva.put("tematica", "Tecnologia");
-					colaboracionNueva.put("fecha_incio", "2024-07-01");
-					colaboracionNueva.put("fecha_final", "2023-03-30");
-					colaboracionNueva.put("tipo", "Patrocinio");
-					colaboracionNueva.put("estado", "Activa");
-					ArrayNode colaboracion = (ArrayNode) creador.get("colavoraciones");
+					colaboracionNueva.put("colaborador", this.vista.cbAnfitrion.getSelectedItem().toString().split(" ",2)[1]);
+					colaboracionNueva.put("tematica", this.vista.tfTematica.getText().toString());
+					colaboracionNueva.put("fecha_incio", this.vista.tfFechaInicio.getText().toString());
+					colaboracionNueva.put("tipo", this.vista.tfTipo.getText().toString());
+					ArrayNode colaboracion = (ArrayNode) creador.get("colaboraciones");
 					colaboracion.add(colaboracionNueva);	
 			}
 		}
 		for (JsonNode creador : creadoresNode) {
 			if (creador.get("id").asText().equalsIgnoreCase(id2)) {
-					colaboracionNueva.put("colaborador", "juanjo");
-					colaboracionNueva.put("tematica", "Tecnologia");
-					colaboracionNueva.put("fecha_incio", "2024-07-01");
-					colaboracionNueva.put("fecha_final", "2023-03-30");
-					colaboracionNueva.put("tipo", "Patrocinio");
-					colaboracionNueva.put("estado", "Activa");
-					ArrayNode colaboracion = (ArrayNode) creador.get("colavoraciones");
+					colaboracionNueva.put("colaborador", this.vista.cbInvitado.getSelectedItem().toString().split(" ",2)[1]);
+					colaboracionNueva.put("tematica", this.vista.tfTematica.getText().toString());
+					colaboracionNueva.put("fecha_incio", this.vista.tfFechaInicio.getText().toString());
+					colaboracionNueva.put("tipo", this.vista.tfTipo.getText().toString());
+					ArrayNode colaboracion = (ArrayNode) creador.get("colaboraciones");
 					colaboracion.add(colaboracionNueva);	
 			}
 		}
 		
+		System.out.println(creadoresNode);
+		
 	}
 	
-	public void colaboracionestoCSV (ArrayNode creadoresNode) {
+	public void colaboracionestoCSV () {
 		String nombre = null, seguidores = null, colaborador = null, fecha_inicio = null, fecha_fin = null;
 		int id = 0, promedio_visitas_mensuales= 0; 
 		long interacciones_totales = 0;
@@ -745,20 +916,19 @@ public class Controlador implements ActionListener, MouseListener {
 		crearCSVColaboracion(colaboraciones, "files\\colaboraciones.csv");
 	}
 	
-	public void modMetricas (List<Metrica> metricas) {
+	public void modMetricas () {
 		for (Metrica metrica : metricas) {
-			int actualizar =0;
-			String idmetrica = "1";
-			if (String.valueOf(metrica.getCreador_id()).equalsIgnoreCase(idmetrica)) {
-				metrica.setComentarios(metrica.getComentarios()+actualizar);
-				metrica.setMe_gusta(metrica.getMe_gusta()+actualizar);
+			String idmetrica = (String) vista.cbContenidoModif.getSelectedItem();
+			if (String.valueOf(metrica.getContenido()).equalsIgnoreCase(idmetrica)) {
+				metrica.setComentarios(Integer.parseInt(this.vista.tfComentariosModif.getText().toString()));
+				metrica.setMe_gusta(Integer.parseInt(this.vista.tfMGModif.getText().toString()));
 			}
 			
 		}
-		crearCSVMetricas(metricas, "files\\metricas_contenido.csv");
+		crearCSVMetricas("files\\metricas_contenido.csv");
 
 	}
-	public void delMetricas (List<Metrica> metricas) {
+	public void delMetricas () {
 		for (Metrica metrica : metricas) {
 			int minimo =0;
 			String idmetrica = "1";
@@ -769,27 +939,32 @@ public class Controlador implements ActionListener, MouseListener {
 
 
 		}
+		crearCSVMetricas("files\\metricas_contenido.csv");
+
 
 	}
 	
-	public void addMetricas (List<Metrica> metricas, ArrayNode creadoresNode) {
+	public void addMetricas () {
+		
 		int newId = metricas.size()+1;
 		Metrica metrica = new Metrica();
-		metrica.setCreador_id(5);
-		metrica.setComentarios(24);
-		metrica.setCompartidos(34);
+		metrica.setCreador_id(Integer.parseInt(this.vista.tfPubliIdCreadorInsert.getText().toString()));
+		metrica.setComentarios(Integer.parseInt(this.vista.tfPubliComentariosInsert.getText().toString()));
+		metrica.setCompartidos(Integer.parseInt(this.vista.tfPubliCompartidosInsert.getText().toString()));
 		metrica.setContenido("Contenido "+newId);
-		metrica.setFecha("2024-09-14");
-		metrica.setMe_gusta(2454);
-		metrica.setPlataforma("twitch");
-		metrica.setTipo("video");
-		metrica.setVistas(500);
+		metrica.setFecha(this.vista.tfPubliFechaInsert.getText().toString());
+		metrica.setMe_gusta(Integer.parseInt(this.vista.tfPubliGustasInsert.getText().toString()));
+		String seleccion = (String) vista.cbPubliPlataformasInsert.getSelectedItem();
+		metrica.setPlataforma( seleccion);
+		seleccion = (String) vista.cbPubliContenidoInsert.getSelectedItem();
+		metrica.setTipo(seleccion);
+		metrica.setVistas(Integer.parseInt(this.vista.tfPubliVistasInsert.getText().toString()));
 		
 		metricas.add(metrica);
 		
 		
 
-		//crearCSVMetricas(metricas, "files\\metricas_contenido.csv");
+		crearCSVMetricas("files\\metricas_contenido.csv");
 
 	}
 	
@@ -831,7 +1006,7 @@ public class Controlador implements ActionListener, MouseListener {
         }
 	}
 	
-	public void crearCSVMetricas(List<Metrica> metricas, String rutaCSV) {
+	public void crearCSVMetricas( String rutaCSV) {
 		try {
             FileWriter fw = new FileWriter(rutaCSV);
             StatefulBeanToCsv<Metrica> beanToCsv = new StatefulBeanToCsvBuilder<Metrica>(fw).build();
@@ -851,32 +1026,18 @@ public class Controlador implements ActionListener, MouseListener {
 		box.setModel(modelo);
 		
 	}
-	public void recorrerColaboradores (ArrayNode creadoresNode, String id) {
-
+	public void rellenarcolab () {
 		for (JsonNode creador : creadoresNode) {
-				if (creador.get("id").asText().equals(id)) {
-					for (JsonNode plataforma : creador.get("plataformas")) {
-						System.out.println(plataforma.get("nombre").asText());
-						System.out.println(plataforma.get("usuario").asText());
-						System.out.println(plataforma.get("seguidores").asText());
-						System.out.println(plataforma.get("fecha_creacion").asText());
-						for (JsonNode historial : plataforma.get("historico")) {
-							System.out.println(historial.get("fecha").asText());
-							System.out.println(historial.get("nuevos_seguidores").asText());
-							System.out.println(historial.get("interacciones").asText());
-						}
-					}
-					for (JsonNode colaboracion : creador.get("colaboraciones")){
-						
-						System.out.println(colaboracion.get("colaborador").asText()+" - "+colaboracion.get("tematica").asText());
-						System.out.println();
-						System.out.println(colaboracion.get("fecha_fin").asText());
-					}
-					System.out.println("-----------------");
+			if (creador.get("id").asText().equalsIgnoreCase(id)) {
+				for(JsonNode colaboracion : creador.get("colaboraciones")) {
+					String colab = colaboracion.get("colaborador").asText()+" - "+colaboracion.get("tematica").asText();
+					colabs.add(colab);
 				}
+			}
 		}
-		
+	
 	}
+
 
 
 
