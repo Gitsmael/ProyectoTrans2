@@ -189,6 +189,14 @@ public class Controlador implements ActionListener, MouseListener {
                 recorrerDatos();
             	rellenarcolab();
       			contenidoStrong();
+      			vista.lblColaboradorMostrar.setText("");
+      			vista.lblTematicaColabMostrar.setText("");
+      			vista.lblTipoMostrar.setText("");
+      			vista.lblUsuarioMostrar.setText("");
+      			vista.lblUsuarioMostrar.setText("");
+      			vista.lblEstadoMostrar.setText("");
+      			vista.lblSeguidoresMostrar.setText("");
+      			vista.lblFCreacionMostrar.setText("");
       			try {
 					resumenRendimiento();
 				} catch (IOException e1) {
@@ -230,6 +238,7 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelPublicaciones.enable(false);
       			vista.panelMetricas.setVisible(false);
       			vista.panelMetricas.enable(false);
+      			
       		}
       		if(e.getSource()==vista.btnColaboraciones) {
       			vista.panelDatosGenerales.setVisible(false);
@@ -242,6 +251,8 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelPublicaciones.enable(false);
       			vista.panelMetricas.setVisible(false);
       			vista.panelMetricas.enable(false);
+      			vista.panelBotonesColabs.setVisible(true);
+      			vista.panelInsertarColab.setVisible(false);
       		}
       		if(e.getSource()==vista.btnPUBLICACIONES) {
       			vista.panelDatosGenerales.setVisible(false);
@@ -252,6 +263,11 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelPublicaciones.enable(true);
       			vista.panelMetricas.setVisible(false);
       			vista.panelMetricas.enable(false);
+      			vista.panelBotonesPublis.setVisible(true);
+      			vista.panelEliminarPubli.setVisible(false);
+      			vista.panelInsertarPubli.setVisible(false);
+      			vista.panelModificarPubli.setVisible(false);
+      			vista.btnVolverPubli.setVisible(false);
       		}
       		if(e.getSource()==vista.btnMetricas) {
       			vista.panelDatosGenerales.setVisible(false);
@@ -262,6 +278,10 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelPublicaciones.enable(false);
       			vista.panelMetricas.setVisible(true);
       			vista.panelMetricas.enable(true);
+      			vista.panelBotonesMetricas.setVisible(true);
+      			vista.panelAnalisisMetricas.setVisible(false);
+      			vista.btnVolverMetrica.setVisible(false);
+      			
       		}
       		
       		
@@ -370,6 +390,14 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelModificarPubli.setVisible(false);
       			vista.panelEliminarPubli.setVisible(false);
       			vista.btnVolverPubli.setVisible(false);
+      			vista.tfPubliComentariosInsert.setText("");
+      			vista.tfPubliCompartidosInsert.setText("");
+      			vista.tfPubliFechaInsert.setText("");
+      			vista.tfPubliGustasInsert.setText("");
+      			vista.tfPubliIdCreadorInsert.setText("");
+      			vista.tfPubliVistasInsert.setText("");
+      			vista.tfComentariosModif.setText("");
+      			vista.tfMGModif.setText("");
       		}
       		if(e.getSource()==vista.btnAniadirPubli) {
       			vista.panelInsertarPubli.setVisible(true);
@@ -378,22 +406,36 @@ public class Controlador implements ActionListener, MouseListener {
       			
       		}
       		if(e.getSource()==vista.btnInsertarPubli) {
-      			if(vista.tfPubliFechaInsert.getText().equals("")||vista.tfPubliIdCreadorInsert.getText().equals("")||vista.tfPubliVistasInsert.getText().equals("")||vista.tfPubliGustasInsert.getText().equals("")||vista.tfPubliComentariosInsert.getText().equals("")||vista.tfPubliComentariosInsert.getText().equals("")) {
+      			if(vista.tfPubliFechaInsert.getText().equals("")||vista.tfPubliIdCreadorInsert.getText().equals("")||vista.tfPubliVistasInsert.getText().equals("")||vista.tfPubliGustasInsert.getText().equals("")
+      					||vista.tfPubliComentariosInsert.getText().equals("")){
       				vista.lblMsgCorrecto.setText("UNO O VARIOS CAMPOS SON INCORRECTOS");
       				vista.lblMsgCorrecto.setForeground(new Color(255,0,0));
       				temporizador();
       			}else{
       				vista.tfPubliFechaInsert.setText("");
-      				vista.tfPubliIdCreadorInsert.setText("");
+          			vista.tfPubliIdCreadorInsert.setText("");
+          			vista.tfPubliComentariosInsert.setText("");
+          			vista.tfPubliCompartidosInsert.setText("");
+          			vista.tfPubliFechaInsert.setText("");
+          			vista.tfPubliGustasInsert.setText("");
+          			vista.tfPubliIdCreadorInsert.setText("");
+          			vista.tfPubliVistasInsert.setText("");
       				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
       				addMetricas();
       				vista.lblMsgCorrecto.setText("PUBLICACION CREADA CORRECTAMENTE");
       				temporizador();
       			}
       		}
+      		
       		if(e.getSource()==vista.btnBorrarDatosPubli) {
       			vista.tfPubliFechaInsert.setText("");
       			vista.tfPubliIdCreadorInsert.setText("");
+      			vista.tfPubliComentariosInsert.setText("");
+      			vista.tfPubliCompartidosInsert.setText("");
+      			vista.tfPubliFechaInsert.setText("");
+      			vista.tfPubliGustasInsert.setText("");
+      			vista.tfPubliIdCreadorInsert.setText("");
+      			vista.tfPubliVistasInsert.setText("");
       		}
       		
       		//BOTONES MODIFICAR PUBLI
@@ -409,17 +451,21 @@ public class Controlador implements ActionListener, MouseListener {
       				vista.lblMsgCorrecto.setForeground(new Color(255,0,0));
       				temporizador();
       			}else {
-      				vista.tfPubliFechaInsert.setText("");
-      				vista.tfPubliIdCreadorInsert.setText("");
+      				
+      				String tfComent = vista.tfComentariosModif.getText();
+      				int numTfComent = Integer.parseInt(tfComent);
       				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
       				modMetricas();
       				vista.lblMsgCorrecto.setText("PUBLICACION MODIFICADA CORRECTAMENTE");
       				temporizador();
+      				vista.tfComentariosModif.setText("");
+      				vista.tfMGModif.setText("");
       			}
       		}
       		
       		if (e.getSource()==vista.btnBorrarDatosModif) {
-      			
+      			vista.tfComentariosModif.setText("");
+      			vista.tfMGModif.setText("");
       		}
 
       		
@@ -970,17 +1016,17 @@ public class Controlador implements ActionListener, MouseListener {
 		
 		int newId = metricas.size()+1;
 		Metrica metrica = new Metrica();
-		metrica.setCreador_id(Integer.parseInt(this.vista.tfPubliIdCreadorInsert.getText().toString()));
-		metrica.setComentarios(Integer.parseInt(this.vista.tfPubliComentariosInsert.getText().toString()));
-		metrica.setCompartidos(Integer.parseInt(this.vista.tfPubliCompartidosInsert.getText().toString()));
+		metrica.setCreador_id(Integer.parseInt(this.vista.tfPubliIdCreadorInsert.getText()));
+		metrica.setComentarios(Integer.parseInt(this.vista.tfPubliComentariosInsert.getText()));
+		metrica.setCompartidos(Integer.parseInt(this.vista.tfPubliCompartidosInsert.getText()));
 		metrica.setContenido("Contenido "+newId);
 		metrica.setFecha(this.vista.tfPubliFechaInsert.getText().toString());
-		metrica.setMe_gusta(Integer.parseInt(this.vista.tfPubliGustasInsert.getText().toString()));
+		metrica.setMe_gusta(Integer.parseInt(this.vista.tfPubliGustasInsert.getText()));
 		String seleccion = (String) vista.cbPubliPlataformasInsert.getSelectedItem();
 		metrica.setPlataforma( seleccion);
 		seleccion = (String) vista.cbPubliContenidoInsert.getSelectedItem();
 		metrica.setTipo(seleccion);
-		metrica.setVistas(Integer.parseInt(this.vista.tfPubliVistasInsert.getText().toString()));
+		metrica.setVistas(Integer.parseInt(this.vista.tfPubliVistasInsert.getText()));
 		
 		metricas.add(metrica);
 		
