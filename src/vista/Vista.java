@@ -151,33 +151,17 @@ public class Vista extends JFrame {
 	public JPanel panelAnalisisMetricas;
 	public JLabel lblContenidoMayorRendimientoMetrica;
 	public JLabel lblTasaCrecimientoMetrica;
-	public JLabel lblRendimientoPromedioPlataforma;
 	public JLabel lblPlataformaMostrar;
 	public JLabel lblContenidoMayorRendimientoMostrar;
 	public JLabel lblTasaCrecimientoMostrar;
 	public JLabel lblPlataformaMetricas;
 	public JLabel lblMetricaPromedioVistas;
 	public JLabel lblMetricaPromedioVistasMostrar;
-	public JLabel lblVideoMetrica;
-	public JLabel lblImagenMetrica;
-	public JLabel lblStreamMetrica;
 	public JLabel lblCreadorMetricas;
 	public JLabel lblPlataformaMetricas_2;
 	public JLabel lblContenidoMayorRendimientoMostrar_1;
 	public JLabel lblCreadorMostrar;
 	public JLabel lblContenidoMayorRendimientoMostrar_3;
-	public JLabel lblPromedioVideoVistas;
-	public JLabel lblPromedioVideoLikes;
-	public JLabel lblPromedioImagenVistas;
-	public JLabel lblPromedioImagenLikes;
-	public JLabel lblPromedioStreamVistas;
-	public JLabel lblPromedioStreamLikes;
-	public JLabel lblPromedioVideoVistasMostrar;
-	public JLabel lblPromedioVideoLikesMostrar;
-	public JLabel lblPromedioImagenVistasMostrar;
-	public JLabel lblPromedioImagenLikesMostrar;
-	public JLabel lblPromedioStreamVistasMostrar;
-	public JLabel lblPromedioStreamLikesMostrar;
 	public JLabel lblApartirde;
 	public JTextField textField;
 	public String[]VistasMg= {"Vistas","Me gusta"}; 
@@ -213,6 +197,177 @@ public class Vista extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+								
+								//-------------------PANEL METRICAS------------------------------------------------------
+								
+								panelMetricas = new JPanel();
+								panelMetricas.setBounds(10, 98, 659, 585);
+								contentPane.add(panelMetricas);
+								panelMetricas.setLayout(null);
+								
+								
+								panelAnalisisMetricas = new JPanel();
+								panelAnalisisMetricas.setEnabled(false);
+								panelAnalisisMetricas.setVisible(false);
+								
+								btnVolverMetrica = new JButton("Volver");
+								btnVolverMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+								btnVolverMetrica.setBackground(Color.WHITE);
+								btnVolverMetrica.setBounds(559, 51, 90, 49);
+								btnVolverMetrica.setVisible(false);
+								panelMetricas.add(btnVolverMetrica);
+								panelAnalisisMetricas.setBounds(0, 40, 659, 545);
+								panelMetricas.add(panelAnalisisMetricas);
+								panelAnalisisMetricas.setLayout(null);
+								
+								lblContenidoMayorRendimientoMetrica = new JLabel("Contenido mayor rendimiento:");
+								lblContenidoMayorRendimientoMetrica.setHorizontalAlignment(SwingConstants.LEFT);
+								lblContenidoMayorRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 22));
+								lblContenidoMayorRendimientoMetrica.setBounds(new Rectangle(9, 0, 0, 0));
+								lblContenidoMayorRendimientoMetrica.setBackground(Color.WHITE);
+								lblContenidoMayorRendimientoMetrica.setAlignmentY(0.0f);
+								lblContenidoMayorRendimientoMetrica.setBounds(273, 164, 227, 49);
+								panelAnalisisMetricas.add(lblContenidoMayorRendimientoMetrica);
+								
+								lblTasaCrecimientoMetrica = new JLabel("T.Crecimiento 2023:");
+								lblTasaCrecimientoMetrica.setHorizontalAlignment(SwingConstants.LEFT);
+								lblTasaCrecimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 22));
+								lblTasaCrecimientoMetrica.setBounds(new Rectangle(9, 0, 0, 0));
+								lblTasaCrecimientoMetrica.setBackground(Color.WHITE);
+								lblTasaCrecimientoMetrica.setAlignmentY(0.0f);
+								lblTasaCrecimientoMetrica.setBounds(10, 282, 156, 49);
+								panelAnalisisMetricas.add(lblTasaCrecimientoMetrica);
+								
+								lblPlataformaMostrar = new JLabel("");
+								lblPlataformaMostrar.setHorizontalAlignment(SwingConstants.LEFT);
+								lblPlataformaMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblPlataformaMostrar.setBounds(new Rectangle(9, 0, 0, 0));
+								lblPlataformaMostrar.setBackground(Color.WHITE);
+								lblPlataformaMostrar.setAlignmentY(0.0f);
+								lblPlataformaMostrar.setBounds(247, 44, 203, 49);
+								panelAnalisisMetricas.add(lblPlataformaMostrar);
+								
+								lblContenidoMayorRendimientoMostrar = new JLabel("");
+								lblContenidoMayorRendimientoMostrar.setHorizontalAlignment(SwingConstants.LEFT);
+								lblContenidoMayorRendimientoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblContenidoMayorRendimientoMostrar.setBounds(new Rectangle(9, 0, 0, 0));
+								lblContenidoMayorRendimientoMostrar.setBackground(Color.WHITE);
+								lblContenidoMayorRendimientoMostrar.setAlignmentY(0.0f);
+								lblContenidoMayorRendimientoMostrar.setBounds(493, 164, 134, 49);
+								panelAnalisisMetricas.add(lblContenidoMayorRendimientoMostrar);
+								
+								lblTasaCrecimientoMostrar = new JLabel("");
+								lblTasaCrecimientoMostrar.setHorizontalAlignment(SwingConstants.LEFT);
+								lblTasaCrecimientoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblTasaCrecimientoMostrar.setBounds(new Rectangle(9, 0, 0, 0));
+								lblTasaCrecimientoMostrar.setBackground(Color.WHITE);
+								lblTasaCrecimientoMostrar.setAlignmentY(0.0f);
+								lblTasaCrecimientoMostrar.setBounds(493, 223, 134, 49);
+								panelAnalisisMetricas.add(lblTasaCrecimientoMostrar);
+								
+								lblPlataformaMetricas = new JLabel("Plataforma:");
+								lblPlataformaMetricas.setHorizontalAlignment(SwingConstants.LEFT);
+								lblPlataformaMetricas.setFont(new Font("Agency FB", Font.BOLD, 22));
+								lblPlataformaMetricas.setBounds(new Rectangle(9, 0, 0, 0));
+								lblPlataformaMetricas.setBackground(Color.WHITE);
+								lblPlataformaMetricas.setAlignmentY(0.0f);
+								lblPlataformaMetricas.setBounds(10, 164, 89, 49);
+								panelAnalisisMetricas.add(lblPlataformaMetricas);
+								
+								lblMetricaPromedioVistas = new JLabel("Promedio vistas:");
+								lblMetricaPromedioVistas.setHorizontalAlignment(SwingConstants.LEFT);
+								lblMetricaPromedioVistas.setFont(new Font("Agency FB", Font.BOLD, 22));
+								lblMetricaPromedioVistas.setBounds(new Rectangle(9, 0, 0, 0));
+								lblMetricaPromedioVistas.setBackground(Color.WHITE);
+								lblMetricaPromedioVistas.setAlignmentY(0.0f);
+								lblMetricaPromedioVistas.setBounds(273, 282, 203, 49);
+								panelAnalisisMetricas.add(lblMetricaPromedioVistas);
+								
+								lblMetricaPromedioVistasMostrar = new JLabel("");
+								lblMetricaPromedioVistasMostrar.setHorizontalAlignment(SwingConstants.LEFT);
+								lblMetricaPromedioVistasMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblMetricaPromedioVistasMostrar.setBounds(new Rectangle(9, 0, 0, 0));
+								lblMetricaPromedioVistasMostrar.setBackground(Color.WHITE);
+								lblMetricaPromedioVistasMostrar.setAlignmentY(0.0f);
+								lblMetricaPromedioVistasMostrar.setBounds(493, 282, 134, 49);
+								panelAnalisisMetricas.add(lblMetricaPromedioVistasMostrar);
+								
+								lblCreadorMetricas = new JLabel("Creador:");
+								lblCreadorMetricas.setHorizontalAlignment(SwingConstants.LEFT);
+								lblCreadorMetricas.setFont(new Font("Agency FB", Font.BOLD, 22));
+								lblCreadorMetricas.setBounds(new Rectangle(9, 0, 0, 0));
+								lblCreadorMetricas.setBackground(Color.WHITE);
+								lblCreadorMetricas.setAlignmentY(0.0f);
+								lblCreadorMetricas.setBounds(10, 223, 89, 49);
+								panelAnalisisMetricas.add(lblCreadorMetricas);
+								
+								lblPlataformaMetricas_2 = new JLabel("Promedio Me gusta:");
+								lblPlataformaMetricas_2.setHorizontalAlignment(SwingConstants.LEFT);
+								lblPlataformaMetricas_2.setFont(new Font("Agency FB", Font.BOLD, 22));
+								lblPlataformaMetricas_2.setBounds(new Rectangle(9, 0, 0, 0));
+								lblPlataformaMetricas_2.setBackground(Color.WHITE);
+								lblPlataformaMetricas_2.setAlignmentY(0.0f);
+								lblPlataformaMetricas_2.setBounds(273, 223, 156, 49);
+								panelAnalisisMetricas.add(lblPlataformaMetricas_2);
+								
+								lblContenidoMayorRendimientoMostrar_1 = new JLabel("");
+								lblContenidoMayorRendimientoMostrar_1.setHorizontalAlignment(SwingConstants.LEFT);
+								lblContenidoMayorRendimientoMostrar_1.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblContenidoMayorRendimientoMostrar_1.setBounds(new Rectangle(9, 0, 0, 0));
+								lblContenidoMayorRendimientoMostrar_1.setBackground(Color.WHITE);
+								lblContenidoMayorRendimientoMostrar_1.setAlignmentY(0.0f);
+								lblContenidoMayorRendimientoMostrar_1.setBounds(103, 164, 134, 49);
+								panelAnalisisMetricas.add(lblContenidoMayorRendimientoMostrar_1);
+								
+								lblCreadorMostrar = new JLabel("");
+								lblCreadorMostrar.setHorizontalAlignment(SwingConstants.LEFT);
+								lblCreadorMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblCreadorMostrar.setBounds(new Rectangle(9, 0, 0, 0));
+								lblCreadorMostrar.setBackground(Color.WHITE);
+								lblCreadorMostrar.setAlignmentY(0.0f);
+								lblCreadorMostrar.setBounds(103, 223, 134, 49);
+								panelAnalisisMetricas.add(lblCreadorMostrar);
+								
+								lblContenidoMayorRendimientoMostrar_3 = new JLabel("");
+								lblContenidoMayorRendimientoMostrar_3.setHorizontalAlignment(SwingConstants.LEFT);
+								lblContenidoMayorRendimientoMostrar_3.setFont(new Font("Agency FB", Font.PLAIN, 22));
+								lblContenidoMayorRendimientoMostrar_3.setBounds(new Rectangle(9, 0, 0, 0));
+								lblContenidoMayorRendimientoMostrar_3.setBackground(Color.WHITE);
+								lblContenidoMayorRendimientoMostrar_3.setAlignmentY(0.0f);
+								lblContenidoMayorRendimientoMostrar_3.setBounds(176, 282, 87, 49);
+								panelAnalisisMetricas.add(lblContenidoMayorRendimientoMostrar_3);
+								
+								panelBotonesMetricas = new JPanel();
+								panelBotonesMetricas.setLayout(null);
+								panelBotonesMetricas.setBounds(84, 129, 501, 352);
+								panelMetricas.add(panelBotonesMetricas);
+								
+								btnMetricasRendimientoMetrica = new JButton("METRICAS DE RENDIMIENTO");
+								btnMetricasRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+								btnMetricasRendimientoMetrica.setBackground(Color.WHITE);
+								btnMetricasRendimientoMetrica.setBounds(0, 0, 243, 155);
+								panelBotonesMetricas.add(btnMetricasRendimientoMetrica);
+								
+								btnCrearInformeMetrica = new JButton("CREAR INFORME JSON");
+								btnCrearInformeMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+								btnCrearInformeMetrica.setBackground(Color.WHITE);
+								btnCrearInformeMetrica.setBounds(258, 0, 243, 155);
+								panelBotonesMetricas.add(btnCrearInformeMetrica);
+								
+								btnResumenRendimientoMetrica = new JButton("CREAR RESUMEN DE RENDIMIENTO");
+								btnResumenRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+								btnResumenRendimientoMetrica.setBackground(Color.WHITE);
+								btnResumenRendimientoMetrica.setBounds(130, 197, 243, 155);
+								panelBotonesMetricas.add(btnResumenRendimientoMetrica);
+								
+								lblpanelMetricas = new JLabel("METRICAS");
+								lblpanelMetricas.setBounds(0, 0, 659, 40);
+								lblpanelMetricas.setBackground(new Color(255, 204, 102));
+								lblpanelMetricas.setOpaque(true);
+								lblpanelMetricas.setBorder(new LineBorder(new Color(0, 0, 0)));
+								lblpanelMetricas.setFont(new Font("Agency FB", Font.BOLD, 26));
+								lblpanelMetricas.setHorizontalAlignment(SwingConstants.CENTER);
+								panelMetricas.add(lblpanelMetricas);
 						
 								
 								lblMsgCorrecto = new JLabel("");
@@ -739,294 +894,6 @@ public class Vista extends JFrame {
 				panelDatosGenerales.add(lblFCreacionMostrar);
 				
 				String[]VistasMg= {"Vistas","Me gusta"}; 
-		
-		//-------------------PANEL METRICAS------------------------------------------------------
-		
-		panelMetricas = new JPanel();
-		panelMetricas.setBounds(10, 98, 659, 585);
-		contentPane.add(panelMetricas);
-		panelMetricas.setLayout(null);
-		
-		
-		panelAnalisisMetricas = new JPanel();
-		panelAnalisisMetricas.setEnabled(false);
-		panelAnalisisMetricas.setVisible(false);
-		
-		btnVolverMetrica = new JButton("Volver");
-		btnVolverMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnVolverMetrica.setBackground(Color.WHITE);
-		btnVolverMetrica.setBounds(559, 51, 90, 49);
-		btnVolverMetrica.setVisible(false);
-		panelMetricas.add(btnVolverMetrica);
-		panelAnalisisMetricas.setBounds(0, 40, 659, 545);
-		panelMetricas.add(panelAnalisisMetricas);
-		panelAnalisisMetricas.setLayout(null);
-		
-		lblContenidoMayorRendimientoMetrica = new JLabel("Contenido mayor rendimiento:");
-		lblContenidoMayorRendimientoMetrica.setHorizontalAlignment(SwingConstants.LEFT);
-		lblContenidoMayorRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblContenidoMayorRendimientoMetrica.setBounds(new Rectangle(9, 0, 0, 0));
-		lblContenidoMayorRendimientoMetrica.setBackground(Color.WHITE);
-		lblContenidoMayorRendimientoMetrica.setAlignmentY(0.0f);
-		lblContenidoMayorRendimientoMetrica.setBounds(284, 62, 227, 49);
-		panelAnalisisMetricas.add(lblContenidoMayorRendimientoMetrica);
-		
-		lblTasaCrecimientoMetrica = new JLabel("T.Crecimiento 2023:");
-		lblTasaCrecimientoMetrica.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTasaCrecimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblTasaCrecimientoMetrica.setBounds(new Rectangle(9, 0, 0, 0));
-		lblTasaCrecimientoMetrica.setBackground(Color.WHITE);
-		lblTasaCrecimientoMetrica.setAlignmentY(0.0f);
-		lblTasaCrecimientoMetrica.setBounds(21, 180, 156, 49);
-		panelAnalisisMetricas.add(lblTasaCrecimientoMetrica);
-		
-		lblRendimientoPromedioPlataforma = new JLabel("RENDIMIENTO PROMEDIO DE CONTENIDO");
-		lblRendimientoPromedioPlataforma.setOpaque(true);
-		lblRendimientoPromedioPlataforma.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRendimientoPromedioPlataforma.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblRendimientoPromedioPlataforma.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblRendimientoPromedioPlataforma.setBackground(new Color(255, 204, 102));
-		lblRendimientoPromedioPlataforma.setBounds(0, 262, 659, 40);
-		panelAnalisisMetricas.add(lblRendimientoPromedioPlataforma);
-		
-		lblPlataformaMostrar = new JLabel("");
-		lblPlataformaMostrar.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPlataformaMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblPlataformaMostrar.setBounds(new Rectangle(9, 0, 0, 0));
-		lblPlataformaMostrar.setBackground(Color.WHITE);
-		lblPlataformaMostrar.setAlignmentY(0.0f);
-		lblPlataformaMostrar.setBounds(247, 44, 203, 49);
-		panelAnalisisMetricas.add(lblPlataformaMostrar);
-		
-		lblContenidoMayorRendimientoMostrar = new JLabel("");
-		lblContenidoMayorRendimientoMostrar.setHorizontalAlignment(SwingConstants.LEFT);
-		lblContenidoMayorRendimientoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblContenidoMayorRendimientoMostrar.setBounds(new Rectangle(9, 0, 0, 0));
-		lblContenidoMayorRendimientoMostrar.setBackground(Color.WHITE);
-		lblContenidoMayorRendimientoMostrar.setAlignmentY(0.0f);
-		lblContenidoMayorRendimientoMostrar.setBounds(504, 62, 134, 49);
-		panelAnalisisMetricas.add(lblContenidoMayorRendimientoMostrar);
-		
-		lblTasaCrecimientoMostrar = new JLabel("");
-		lblTasaCrecimientoMostrar.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTasaCrecimientoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblTasaCrecimientoMostrar.setBounds(new Rectangle(9, 0, 0, 0));
-		lblTasaCrecimientoMostrar.setBackground(Color.WHITE);
-		lblTasaCrecimientoMostrar.setAlignmentY(0.0f);
-		lblTasaCrecimientoMostrar.setBounds(504, 121, 134, 49);
-		panelAnalisisMetricas.add(lblTasaCrecimientoMostrar);
-		
-		lblPlataformaMetricas = new JLabel("Plataforma:");
-		lblPlataformaMetricas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPlataformaMetricas.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblPlataformaMetricas.setBounds(new Rectangle(9, 0, 0, 0));
-		lblPlataformaMetricas.setBackground(Color.WHITE);
-		lblPlataformaMetricas.setAlignmentY(0.0f);
-		lblPlataformaMetricas.setBounds(21, 62, 89, 49);
-		panelAnalisisMetricas.add(lblPlataformaMetricas);
-		
-		lblMetricaPromedioVistas = new JLabel("Promedio vistas:");
-		lblMetricaPromedioVistas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMetricaPromedioVistas.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblMetricaPromedioVistas.setBounds(new Rectangle(9, 0, 0, 0));
-		lblMetricaPromedioVistas.setBackground(Color.WHITE);
-		lblMetricaPromedioVistas.setAlignmentY(0.0f);
-		lblMetricaPromedioVistas.setBounds(284, 180, 203, 49);
-		panelAnalisisMetricas.add(lblMetricaPromedioVistas);
-		
-		lblMetricaPromedioVistasMostrar = new JLabel("");
-		lblMetricaPromedioVistasMostrar.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMetricaPromedioVistasMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblMetricaPromedioVistasMostrar.setBounds(new Rectangle(9, 0, 0, 0));
-		lblMetricaPromedioVistasMostrar.setBackground(Color.WHITE);
-		lblMetricaPromedioVistasMostrar.setAlignmentY(0.0f);
-		lblMetricaPromedioVistasMostrar.setBounds(504, 180, 134, 49);
-		panelAnalisisMetricas.add(lblMetricaPromedioVistasMostrar);
-		
-		lblCreadorMetricas = new JLabel("Creador:");
-		lblCreadorMetricas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCreadorMetricas.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblCreadorMetricas.setBounds(new Rectangle(9, 0, 0, 0));
-		lblCreadorMetricas.setBackground(Color.WHITE);
-		lblCreadorMetricas.setAlignmentY(0.0f);
-		lblCreadorMetricas.setBounds(21, 121, 89, 49);
-		panelAnalisisMetricas.add(lblCreadorMetricas);
-		
-		lblPlataformaMetricas_2 = new JLabel("Promedio Me gusta:");
-		lblPlataformaMetricas_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPlataformaMetricas_2.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblPlataformaMetricas_2.setBounds(new Rectangle(9, 0, 0, 0));
-		lblPlataformaMetricas_2.setBackground(Color.WHITE);
-		lblPlataformaMetricas_2.setAlignmentY(0.0f);
-		lblPlataformaMetricas_2.setBounds(284, 121, 156, 49);
-		panelAnalisisMetricas.add(lblPlataformaMetricas_2);
-		
-		lblContenidoMayorRendimientoMostrar_1 = new JLabel("");
-		lblContenidoMayorRendimientoMostrar_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblContenidoMayorRendimientoMostrar_1.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblContenidoMayorRendimientoMostrar_1.setBounds(new Rectangle(9, 0, 0, 0));
-		lblContenidoMayorRendimientoMostrar_1.setBackground(Color.WHITE);
-		lblContenidoMayorRendimientoMostrar_1.setAlignmentY(0.0f);
-		lblContenidoMayorRendimientoMostrar_1.setBounds(114, 62, 134, 49);
-		panelAnalisisMetricas.add(lblContenidoMayorRendimientoMostrar_1);
-		
-		lblCreadorMostrar = new JLabel("");
-		lblCreadorMostrar.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCreadorMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblCreadorMostrar.setBounds(new Rectangle(9, 0, 0, 0));
-		lblCreadorMostrar.setBackground(Color.WHITE);
-		lblCreadorMostrar.setAlignmentY(0.0f);
-		lblCreadorMostrar.setBounds(114, 121, 134, 49);
-		panelAnalisisMetricas.add(lblCreadorMostrar);
-		
-		lblContenidoMayorRendimientoMostrar_3 = new JLabel("");
-		lblContenidoMayorRendimientoMostrar_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblContenidoMayorRendimientoMostrar_3.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblContenidoMayorRendimientoMostrar_3.setBounds(new Rectangle(9, 0, 0, 0));
-		lblContenidoMayorRendimientoMostrar_3.setBackground(Color.WHITE);
-		lblContenidoMayorRendimientoMostrar_3.setAlignmentY(0.0f);
-		lblContenidoMayorRendimientoMostrar_3.setBounds(187, 180, 87, 49);
-		panelAnalisisMetricas.add(lblContenidoMayorRendimientoMostrar_3);
-		
-		lblPromedioVideoVistas = new JLabel("Vistas");
-		lblPromedioVideoVistas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioVideoVistas.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioVideoVistas.setBounds(78, 354, 63, 18);
-		panelAnalisisMetricas.add(lblPromedioVideoVistas);
-		
-		lblPromedioVideoLikes = new JLabel("Likes");
-		lblPromedioVideoLikes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioVideoLikes.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioVideoLikes.setBounds(78, 442, 63, 25);
-		panelAnalisisMetricas.add(lblPromedioVideoLikes);
-		
-		lblVideoMetrica = new JLabel("VIDEO");
-		lblVideoMetrica.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblVideoMetrica.setVerticalAlignment(SwingConstants.TOP);
-		lblVideoMetrica.setOpaque(true);
-		lblVideoMetrica.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVideoMetrica.setFont(new Font("Agency FB", Font.BOLD, 25));
-		lblVideoMetrica.setBounds(new Rectangle(9, 0, 0, 0));
-		lblVideoMetrica.setBackground(Color.WHITE);
-		lblVideoMetrica.setAlignmentY(0.0f);
-		lblVideoMetrica.setBounds(0, 302, 214, 243);
-		panelAnalisisMetricas.add(lblVideoMetrica);
-		
-		lblPromedioImagenVistas = new JLabel("Vistas");
-		lblPromedioImagenVistas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioImagenVistas.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioImagenVistas.setBounds(294, 354, 63, 18);
-		panelAnalisisMetricas.add(lblPromedioImagenVistas);
-		
-		lblPromedioImagenLikes = new JLabel("Likes");
-		lblPromedioImagenLikes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioImagenLikes.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioImagenLikes.setBounds(294, 442, 63, 25);
-		panelAnalisisMetricas.add(lblPromedioImagenLikes);
-		
-		lblPromedioStreamVistas = new JLabel("Vistas");
-		lblPromedioStreamVistas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioStreamVistas.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioStreamVistas.setBounds(517, 354, 63, 18);
-		panelAnalisisMetricas.add(lblPromedioStreamVistas);
-		
-		lblPromedioStreamLikes = new JLabel("Likes");
-		lblPromedioStreamLikes.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioStreamLikes.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioStreamLikes.setBounds(517, 442, 63, 25);
-		panelAnalisisMetricas.add(lblPromedioStreamLikes);
-		
-		lblImagenMetrica = new JLabel("IMAGEN");
-		lblImagenMetrica.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblImagenMetrica.setVerticalAlignment(SwingConstants.TOP);
-		lblImagenMetrica.setOpaque(true);
-		lblImagenMetrica.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImagenMetrica.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblImagenMetrica.setBounds(new Rectangle(9, 0, 0, 0));
-		lblImagenMetrica.setBackground(Color.WHITE);
-		lblImagenMetrica.setAlignmentY(0.0f);
-		lblImagenMetrica.setBounds(213, 302, 227, 243);
-		panelAnalisisMetricas.add(lblImagenMetrica);
-		
-		lblStreamMetrica = new JLabel("STREAM");
-		lblStreamMetrica.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblStreamMetrica.setVerticalAlignment(SwingConstants.TOP);
-		lblStreamMetrica.setOpaque(true);
-		lblStreamMetrica.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStreamMetrica.setFont(new Font("Agency FB", Font.BOLD, 25));
-		lblStreamMetrica.setBounds(new Rectangle(9, 0, 0, 0));
-		lblStreamMetrica.setBackground(Color.WHITE);
-		lblStreamMetrica.setAlignmentY(0.0f);
-		lblStreamMetrica.setBounds(437, 302, 222, 243);
-		panelAnalisisMetricas.add(lblStreamMetrica);
-		
-		lblPromedioVideoVistasMostrar = new JLabel("Vistas");
-		lblPromedioVideoVistasMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioVideoVistasMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioVideoVistasMostrar.setBounds(78, 382, 63, 18);
-		panelAnalisisMetricas.add(lblPromedioVideoVistasMostrar);
-		
-		lblPromedioVideoLikesMostrar = new JLabel("Likes");
-		lblPromedioVideoLikesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioVideoLikesMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioVideoLikesMostrar.setBounds(78, 470, 63, 25);
-		panelAnalisisMetricas.add(lblPromedioVideoLikesMostrar);
-		
-		lblPromedioImagenVistasMostrar = new JLabel("Vistas");
-		lblPromedioImagenVistasMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioImagenVistasMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioImagenVistasMostrar.setBounds(294, 382, 63, 18);
-		panelAnalisisMetricas.add(lblPromedioImagenVistasMostrar);
-		
-		lblPromedioImagenLikesMostrar = new JLabel("Likes");
-		lblPromedioImagenLikesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioImagenLikesMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioImagenLikesMostrar.setBounds(294, 470, 63, 25);
-		panelAnalisisMetricas.add(lblPromedioImagenLikesMostrar);
-		
-		lblPromedioStreamVistasMostrar = new JLabel("Vistas");
-		lblPromedioStreamVistasMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioStreamVistasMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioStreamVistasMostrar.setBounds(517, 382, 63, 18);
-		panelAnalisisMetricas.add(lblPromedioStreamVistasMostrar);
-		
-		lblPromedioStreamLikesMostrar = new JLabel("Likes");
-		lblPromedioStreamLikesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioStreamLikesMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblPromedioStreamLikesMostrar.setBounds(517, 470, 63, 25);
-		panelAnalisisMetricas.add(lblPromedioStreamLikesMostrar);
-		
-		panelBotonesMetricas = new JPanel();
-		panelBotonesMetricas.setLayout(null);
-		panelBotonesMetricas.setBounds(84, 129, 501, 352);
-		panelMetricas.add(panelBotonesMetricas);
-		
-		btnMetricasRendimientoMetrica = new JButton("METRICAS DE RENDIMIENTO");
-		btnMetricasRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnMetricasRendimientoMetrica.setBackground(Color.WHITE);
-		btnMetricasRendimientoMetrica.setBounds(0, 0, 243, 155);
-		panelBotonesMetricas.add(btnMetricasRendimientoMetrica);
-		
-		btnCrearInformeMetrica = new JButton("CREAR INFORME JSON");
-		btnCrearInformeMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnCrearInformeMetrica.setBackground(Color.WHITE);
-		btnCrearInformeMetrica.setBounds(258, 0, 243, 155);
-		panelBotonesMetricas.add(btnCrearInformeMetrica);
-		
-		btnResumenRendimientoMetrica = new JButton("CREAR RESUMEN DE RENDIMIENTO");
-		btnResumenRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnResumenRendimientoMetrica.setBackground(Color.WHITE);
-		btnResumenRendimientoMetrica.setBounds(130, 197, 243, 155);
-		panelBotonesMetricas.add(btnResumenRendimientoMetrica);
-		
-		lblpanelMetricas = new JLabel("METRICAS");
-		lblpanelMetricas.setBounds(0, 0, 659, 40);
-		lblpanelMetricas.setBackground(new Color(255, 204, 102));
-		lblpanelMetricas.setOpaque(true);
-		lblpanelMetricas.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblpanelMetricas.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblpanelMetricas.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMetricas.add(lblpanelMetricas);
 		
 		
 		//--------------------------PANEL COLABORACIONES----------------------------------
