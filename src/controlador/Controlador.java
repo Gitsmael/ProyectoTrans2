@@ -377,7 +377,6 @@ public class Controlador implements ActionListener, MouseListener {
 		
 	}
 	public void crearArrayComboBox () {
-		
 		for (JsonNode creador : creadoresNode) {
 			String id = creador.get("id").asText();
 			String nombre = creador.get("nombre").asText();
