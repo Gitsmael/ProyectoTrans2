@@ -211,239 +211,6 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		//--------------------------------------------PANEL DATOS GENERALES---------------------------------
-		panelDatosGenerales = new JPanel();
-		panelDatosGenerales.setBackground(SystemColor.menu);
-		panelDatosGenerales.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelDatosGenerales.setBounds(10, 98, 659, 585);
-		contentPane.add(panelDatosGenerales);
-		panelDatosGenerales.setLayout(null);
-		
-		lblDatosGenerales = new JLabel("DATOS GENERALES");
-		lblDatosGenerales.setBounds(0, 0, 659, 40);
-		lblDatosGenerales.setBackground(new Color(255, 204, 102));
-		lblDatosGenerales.setOpaque(true);
-		lblDatosGenerales.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblDatosGenerales.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblDatosGenerales.setHorizontalAlignment(SwingConstants.CENTER);
-		panelDatosGenerales.add(lblDatosGenerales);
-		
-		lblNombreCreador = new JLabel("Nombre:");
-		lblNombreCreador.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNombreCreador.setBounds(new Rectangle(9, 0, 0, 0));
-		lblNombreCreador.setAlignmentY(Component.TOP_ALIGNMENT);
-		lblNombreCreador.setBackground(new Color(255, 255, 255));
-		lblNombreCreador.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblNombreCreador.setBounds(17, 60, 87, 49);
-		panelDatosGenerales.add(lblNombreCreador);
-		
-		lblPais = new JLabel("Pais:");
-		lblPais.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPais.setBackground(new Color(255, 255, 255));
-		lblPais.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblPais.setBounds(17, 119, 94, 49);
-		panelDatosGenerales.add(lblPais);
-		
-		lblTematica = new JLabel("Tematica:");
-		lblTematica.setBackground(new Color(255, 255, 255));
-		lblTematica.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblTematica.setBounds(17, 178, 94, 49);
-		panelDatosGenerales.add(lblTematica);
-		
-		lblSeguidoresTotales = new JLabel("Seguidores Totales:");
-		lblSeguidoresTotales.setBackground(new Color(255, 255, 255));
-		lblSeguidoresTotales.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblSeguidoresTotales.setBounds(303, 60, 186, 49);
-		panelDatosGenerales.add(lblSeguidoresTotales);
-		
-		lblInteraccionesTotales = new JLabel("Interacciones Totales:");
-		lblInteraccionesTotales.setBackground(new Color(255, 255, 255));
-		lblInteraccionesTotales.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblInteraccionesTotales.setBounds(303, 119, 196, 49);
-		panelDatosGenerales.add(lblInteraccionesTotales);
-		
-		lblPromedioVistasMensuales = new JLabel("Promedio V/M:");
-		lblPromedioVistasMensuales.setBackground(new Color(255, 255, 255));
-		lblPromedioVistasMensuales.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblPromedioVistasMensuales.setBounds(303, 178, 142, 49);
-		panelDatosGenerales.add(lblPromedioVistasMensuales);
-		
-		lblTasaCrecimientoSeguidores = new JLabel("TCS:");
-		lblTasaCrecimientoSeguidores.setBackground(new Color(255, 255, 255));
-		lblTasaCrecimientoSeguidores.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblTasaCrecimientoSeguidores.setBounds(17, 237, 87, 49);
-		panelDatosGenerales.add(lblTasaCrecimientoSeguidores);
-		
-		lblNombreMostrar = new JLabel("");
-		lblNombreMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblNombreMostrar.setBackground(Color.WHITE);
-		lblNombreMostrar.setBounds(114, 60, 163, 49);
-		panelDatosGenerales.add(lblNombreMostrar);
-		
-		lblPaisMostrar = new JLabel("");
-		lblPaisMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPaisMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblPaisMostrar.setBackground(Color.WHITE);
-		lblPaisMostrar.setBounds(114, 119, 163, 49);
-		panelDatosGenerales.add(lblPaisMostrar);
-		
-		lblTematicaMostrar = new JLabel("");
-		lblTematicaMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTematicaMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblTematicaMostrar.setBackground(Color.WHITE);
-		lblTematicaMostrar.setBounds(114, 178, 163, 49);
-		panelDatosGenerales.add(lblTematicaMostrar);
-		
-		lblSeguidoresTotalesMostrar = new JLabel("");
-		lblSeguidoresTotalesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSeguidoresTotalesMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblSeguidoresTotalesMostrar.setBackground(Color.WHITE);
-		lblSeguidoresTotalesMostrar.setBounds(496, 60, 153, 49);
-		panelDatosGenerales.add(lblSeguidoresTotalesMostrar);
-		
-		lblInteraccionesTotalesMostrar = new JLabel("");
-		lblInteraccionesTotalesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInteraccionesTotalesMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblInteraccionesTotalesMostrar.setBackground(Color.WHITE);
-		lblInteraccionesTotalesMostrar.setBounds(496, 119, 153, 49);
-		panelDatosGenerales.add(lblInteraccionesTotalesMostrar);
-		
-		lblPromedioVistasMensualesMostrar = new JLabel("");
-		lblPromedioVistasMensualesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPromedioVistasMensualesMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblPromedioVistasMensualesMostrar.setBackground(Color.WHITE);
-		lblPromedioVistasMensualesMostrar.setBounds(496, 178, 153, 49);
-		panelDatosGenerales.add(lblPromedioVistasMensualesMostrar);
-		
-		lblTasaCrecimientoSeguidoresMostrar = new JLabel("");
-		lblTasaCrecimientoSeguidoresMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTasaCrecimientoSeguidoresMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblTasaCrecimientoSeguidoresMostrar.setBackground(Color.WHITE);
-		lblTasaCrecimientoSeguidoresMostrar.setBounds(114, 237, 163, 49);
-		panelDatosGenerales.add(lblTasaCrecimientoSeguidoresMostrar);
-		
-		lblColaboraciones = new JLabel("COLABORACIONES");
-		lblColaboraciones.setOpaque(true);
-		lblColaboraciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblColaboraciones.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblColaboraciones.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblColaboraciones.setBackground(new Color(255, 204, 102));
-		lblColaboraciones.setBounds(0, 296, 330, 40);
-		panelDatosGenerales.add(lblColaboraciones);
-		
-		lblNombreColaborador = new JLabel("Colaborador:");
-		lblNombreColaborador.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblNombreColaborador.setBackground(Color.WHITE);
-		lblNombreColaborador.setBounds(17, 367, 108, 49);
-		panelDatosGenerales.add(lblNombreColaborador);
-		
-		lblTematicaColab = new JLabel("Tematica:");
-		lblTematicaColab.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblTematicaColab.setBackground(Color.WHITE);
-		lblTematicaColab.setBounds(17, 415, 87, 49);
-		panelDatosGenerales.add(lblTematicaColab);
-		
-		lblTipoColab = new JLabel("Tipo:");
-		lblTipoColab.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblTipoColab.setBackground(Color.WHITE);
-		lblTipoColab.setBounds(17, 467, 87, 49);
-		panelDatosGenerales.add(lblTipoColab);
-		
-		lblEstadoColab = new JLabel("Estado:");
-		lblEstadoColab.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblEstadoColab.setBackground(Color.WHITE);
-		lblEstadoColab.setBounds(17, 515, 87, 49);
-		panelDatosGenerales.add(lblEstadoColab);
-		
-		lblDatosPlataforma = new JLabel("DATOS PLATAFORMA");
-		lblDatosPlataforma.setOpaque(true);
-		lblDatosPlataforma.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDatosPlataforma.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblDatosPlataforma.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblDatosPlataforma.setBackground(new Color(255, 204, 102));
-		lblDatosPlataforma.setBounds(329, 296, 330, 40);
-		panelDatosGenerales.add(lblDatosPlataforma);
-		
-		CBColaboraciones = new JComboBox();
-		CBColaboraciones.setBackground(Color.WHITE);
-		CBColaboraciones.setFont(new Font("Agency FB", Font.BOLD, 17));
-		CBColaboraciones.setBounds(178, 342, 141, 21);
-		panelDatosGenerales.add(CBColaboraciones);
-		
-		lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblUsuario.setBackground(Color.WHITE);
-		lblUsuario.setBounds(347, 367, 108, 49);
-		panelDatosGenerales.add(lblUsuario);
-		
-		lblSeguidores = new JLabel("Seguidores:");
-		lblSeguidores.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblSeguidores.setBackground(Color.WHITE);
-		lblSeguidores.setBounds(347, 428, 108, 49);
-		panelDatosGenerales.add(lblSeguidores);
-		
-		lblFcreacion = new JLabel("F.Creacion:");
-		lblFcreacion.setFont(new Font("Agency FB", Font.BOLD, 22));
-		lblFcreacion.setBackground(Color.WHITE);
-		lblFcreacion.setBounds(347, 487, 108, 49);
-		panelDatosGenerales.add(lblFcreacion);
-		
-		lblLinea = new JLabel("");
-		lblLinea.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblLinea.setBounds(329, 335, 330, 250);
-		panelDatosGenerales.add(lblLinea);
-		
-		lblColaboradorMostrar = new JLabel("");
-		lblColaboradorMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblColaboradorMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblColaboradorMostrar.setBackground(Color.WHITE);
-		lblColaboradorMostrar.setBounds(114, 367, 163, 49);
-		panelDatosGenerales.add(lblColaboradorMostrar);
-		
-		lblTematicaColabMostrar = new JLabel("");
-		lblTematicaColabMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTematicaColabMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblTematicaColabMostrar.setBackground(Color.WHITE);
-		lblTematicaColabMostrar.setBounds(114, 415, 163, 49);
-		panelDatosGenerales.add(lblTematicaColabMostrar);
-		
-		lblTipoMostrar = new JLabel("");
-		lblTipoMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTipoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblTipoMostrar.setBackground(Color.WHITE);
-		lblTipoMostrar.setBounds(114, 467, 163, 49);
-		panelDatosGenerales.add(lblTipoMostrar);
-		
-		lblEstadoMostrar = new JLabel("");
-		lblEstadoMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEstadoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblEstadoMostrar.setBackground(Color.WHITE);
-		lblEstadoMostrar.setBounds(114, 515, 163, 49);
-		panelDatosGenerales.add(lblEstadoMostrar);
-		
-		lblUsuarioMostrar = new JLabel("");
-		lblUsuarioMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuarioMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblUsuarioMostrar.setBackground(Color.WHITE);
-		lblUsuarioMostrar.setBounds(465, 367, 163, 49);
-		panelDatosGenerales.add(lblUsuarioMostrar);
-		
-		lblSeguidoresMostrar = new JLabel("");
-		lblSeguidoresMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSeguidoresMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblSeguidoresMostrar.setBackground(Color.WHITE);
-		lblSeguidoresMostrar.setBounds(465, 428, 163, 49);
-		panelDatosGenerales.add(lblSeguidoresMostrar);
-		
-		lblFCreacionMostrar = new JLabel("");
-		lblFCreacionMostrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFCreacionMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
-		lblFCreacionMostrar.setBackground(Color.WHITE);
-		lblFCreacionMostrar.setBounds(465, 487, 163, 49);
-		panelDatosGenerales.add(lblFCreacionMostrar);
-		
 		//-------------------PANEL METRICAS------------------------------------------------------
 		
 		panelMetricas = new JPanel();
@@ -451,49 +218,16 @@ public class Vista extends JFrame {
 		contentPane.add(panelMetricas);
 		panelMetricas.setLayout(null);
 		
-		
-		panelAnalisisMetricas = new JPanel();
-		panelAnalisisMetricas.setEnabled(false);
-		panelAnalisisMetricas.setVisible(false);
-		
 		btnVolverMetrica = new JButton("Volver");
 		btnVolverMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnVolverMetrica.setBackground(Color.WHITE);
 		btnVolverMetrica.setBounds(559, 51, 90, 49);
 		btnVolverMetrica.setVisible(false);
 		
-		panelBotonesMetricas = new JPanel();
-		panelBotonesMetricas.setLayout(null);
-		panelBotonesMetricas.setBounds(84, 129, 501, 352);
-		panelMetricas.add(panelBotonesMetricas);
 		
-		btnMetricasRendimientoMetrica = new JButton("METRICAS DE RENDIMIENTO");
-		btnMetricasRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnMetricasRendimientoMetrica.setBackground(Color.WHITE);
-		btnMetricasRendimientoMetrica.setBounds(0, 0, 243, 155);
-		panelBotonesMetricas.add(btnMetricasRendimientoMetrica);
-		
-		btnCrearInformeMetrica = new JButton("CREAR INFORME JSON");
-		btnCrearInformeMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnCrearInformeMetrica.setBackground(Color.WHITE);
-		btnCrearInformeMetrica.setBounds(258, 0, 243, 155);
-		panelBotonesMetricas.add(btnCrearInformeMetrica);
-		
-		btnResumenRendimientoMetrica = new JButton("CREAR RESUMEN DE RENDIMIENTO");
-		btnResumenRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnResumenRendimientoMetrica.setBackground(Color.WHITE);
-		btnResumenRendimientoMetrica.setBounds(130, 197, 243, 155);
-		panelBotonesMetricas.add(btnResumenRendimientoMetrica);
-		panelMetricas.add(btnVolverMetrica);
-		
-		lblpanelMetricas = new JLabel("METRICAS");
-		lblpanelMetricas.setBounds(0, 0, 659, 40);
-		lblpanelMetricas.setBackground(new Color(255, 204, 102));
-		lblpanelMetricas.setOpaque(true);
-		lblpanelMetricas.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblpanelMetricas.setFont(new Font("Agency FB", Font.BOLD, 26));
-		lblpanelMetricas.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMetricas.add(lblpanelMetricas);
+		panelAnalisisMetricas = new JPanel();
+		panelAnalisisMetricas.setEnabled(false);
+		panelAnalisisMetricas.setVisible(false);
 		panelAnalisisMetricas.setBounds(0, 40, 659, 545);
 		panelMetricas.add(panelAnalisisMetricas);
 		panelAnalisisMetricas.setLayout(null);
@@ -731,6 +465,272 @@ public class Vista extends JFrame {
 		lblPromedioStreamLikesMostrar.setFont(new Font("Agency FB", Font.BOLD, 26));
 		lblPromedioStreamLikesMostrar.setBounds(517, 470, 63, 25);
 		panelAnalisisMetricas.add(lblPromedioStreamLikesMostrar);
+		
+		panelBotonesMetricas = new JPanel();
+		panelBotonesMetricas.setLayout(null);
+		panelBotonesMetricas.setBounds(84, 129, 501, 352);
+		panelMetricas.add(panelBotonesMetricas);
+		
+		btnMetricasRendimientoMetrica = new JButton("METRICAS DE RENDIMIENTO");
+		btnMetricasRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnMetricasRendimientoMetrica.setBackground(Color.WHITE);
+		btnMetricasRendimientoMetrica.setBounds(0, 0, 243, 155);
+		panelBotonesMetricas.add(btnMetricasRendimientoMetrica);
+		
+		btnCrearInformeMetrica = new JButton("CREAR INFORME JSON");
+		btnCrearInformeMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnCrearInformeMetrica.setBackground(Color.WHITE);
+		btnCrearInformeMetrica.setBounds(258, 0, 243, 155);
+		panelBotonesMetricas.add(btnCrearInformeMetrica);
+		
+		btnResumenRendimientoMetrica = new JButton("CREAR RESUMEN DE RENDIMIENTO");
+		btnResumenRendimientoMetrica.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnResumenRendimientoMetrica.setBackground(Color.WHITE);
+		btnResumenRendimientoMetrica.setBounds(130, 197, 243, 155);
+		panelBotonesMetricas.add(btnResumenRendimientoMetrica);
+		panelMetricas.add(btnVolverMetrica);
+		
+		lblpanelMetricas = new JLabel("METRICAS");
+		lblpanelMetricas.setBounds(0, 0, 659, 40);
+		lblpanelMetricas.setBackground(new Color(255, 204, 102));
+		lblpanelMetricas.setOpaque(true);
+		lblpanelMetricas.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblpanelMetricas.setFont(new Font("Agency FB", Font.BOLD, 26));
+		lblpanelMetricas.setHorizontalAlignment(SwingConstants.CENTER);
+		panelMetricas.add(lblpanelMetricas);
+		
+		
+		//--------------------------------------------PANEL DATOS GENERALES---------------------------------
+		panelDatosGenerales = new JPanel();
+		panelDatosGenerales.setBackground(SystemColor.menu);
+		panelDatosGenerales.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelDatosGenerales.setBounds(10, 98, 659, 585);
+		contentPane.add(panelDatosGenerales);
+		panelDatosGenerales.setLayout(null);
+		
+		lblDatosGenerales = new JLabel("DATOS GENERALES");
+		lblDatosGenerales.setBounds(0, 0, 659, 40);
+		lblDatosGenerales.setBackground(new Color(255, 204, 102));
+		lblDatosGenerales.setOpaque(true);
+		lblDatosGenerales.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblDatosGenerales.setFont(new Font("Agency FB", Font.BOLD, 26));
+		lblDatosGenerales.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatosGenerales.add(lblDatosGenerales);
+		
+		lblNombreCreador = new JLabel("Nombre:");
+		lblNombreCreador.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNombreCreador.setBounds(new Rectangle(9, 0, 0, 0));
+		lblNombreCreador.setAlignmentY(Component.TOP_ALIGNMENT);
+		lblNombreCreador.setBackground(new Color(255, 255, 255));
+		lblNombreCreador.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblNombreCreador.setBounds(17, 60, 87, 49);
+		panelDatosGenerales.add(lblNombreCreador);
+		
+		lblPais = new JLabel("Pais:");
+		lblPais.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPais.setBackground(new Color(255, 255, 255));
+		lblPais.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPais.setBounds(17, 119, 94, 49);
+		panelDatosGenerales.add(lblPais);
+		
+		lblTematica = new JLabel("Tematica:");
+		lblTematica.setBackground(new Color(255, 255, 255));
+		lblTematica.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblTematica.setBounds(17, 178, 94, 49);
+		panelDatosGenerales.add(lblTematica);
+		
+		lblSeguidoresTotales = new JLabel("Seguidores Totales:");
+		lblSeguidoresTotales.setBackground(new Color(255, 255, 255));
+		lblSeguidoresTotales.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblSeguidoresTotales.setBounds(303, 60, 186, 49);
+		panelDatosGenerales.add(lblSeguidoresTotales);
+		
+		lblInteraccionesTotales = new JLabel("Interacciones Totales:");
+		lblInteraccionesTotales.setBackground(new Color(255, 255, 255));
+		lblInteraccionesTotales.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblInteraccionesTotales.setBounds(303, 119, 196, 49);
+		panelDatosGenerales.add(lblInteraccionesTotales);
+		
+		lblPromedioVistasMensuales = new JLabel("Promedio V/M:");
+		lblPromedioVistasMensuales.setBackground(new Color(255, 255, 255));
+		lblPromedioVistasMensuales.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPromedioVistasMensuales.setBounds(303, 178, 142, 49);
+		panelDatosGenerales.add(lblPromedioVistasMensuales);
+		
+		lblTasaCrecimientoSeguidores = new JLabel("TCS:");
+		lblTasaCrecimientoSeguidores.setBackground(new Color(255, 255, 255));
+		lblTasaCrecimientoSeguidores.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblTasaCrecimientoSeguidores.setBounds(17, 237, 87, 49);
+		panelDatosGenerales.add(lblTasaCrecimientoSeguidores);
+		
+		lblNombreMostrar = new JLabel("");
+		lblNombreMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombreMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblNombreMostrar.setBackground(Color.WHITE);
+		lblNombreMostrar.setBounds(114, 60, 163, 49);
+		panelDatosGenerales.add(lblNombreMostrar);
+		
+		lblPaisMostrar = new JLabel("");
+		lblPaisMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPaisMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblPaisMostrar.setBackground(Color.WHITE);
+		lblPaisMostrar.setBounds(114, 119, 163, 49);
+		panelDatosGenerales.add(lblPaisMostrar);
+		
+		lblTematicaMostrar = new JLabel("");
+		lblTematicaMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTematicaMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblTematicaMostrar.setBackground(Color.WHITE);
+		lblTematicaMostrar.setBounds(114, 178, 163, 49);
+		panelDatosGenerales.add(lblTematicaMostrar);
+		
+		lblSeguidoresTotalesMostrar = new JLabel("");
+		lblSeguidoresTotalesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeguidoresTotalesMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblSeguidoresTotalesMostrar.setBackground(Color.WHITE);
+		lblSeguidoresTotalesMostrar.setBounds(496, 60, 153, 49);
+		panelDatosGenerales.add(lblSeguidoresTotalesMostrar);
+		
+		lblInteraccionesTotalesMostrar = new JLabel("");
+		lblInteraccionesTotalesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInteraccionesTotalesMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblInteraccionesTotalesMostrar.setBackground(Color.WHITE);
+		lblInteraccionesTotalesMostrar.setBounds(496, 119, 153, 49);
+		panelDatosGenerales.add(lblInteraccionesTotalesMostrar);
+		
+		lblPromedioVistasMensualesMostrar = new JLabel("");
+		lblPromedioVistasMensualesMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPromedioVistasMensualesMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblPromedioVistasMensualesMostrar.setBackground(Color.WHITE);
+		lblPromedioVistasMensualesMostrar.setBounds(496, 178, 153, 49);
+		panelDatosGenerales.add(lblPromedioVistasMensualesMostrar);
+		
+		lblTasaCrecimientoSeguidoresMostrar = new JLabel("");
+		lblTasaCrecimientoSeguidoresMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTasaCrecimientoSeguidoresMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblTasaCrecimientoSeguidoresMostrar.setBackground(Color.WHITE);
+		lblTasaCrecimientoSeguidoresMostrar.setBounds(114, 237, 163, 49);
+		panelDatosGenerales.add(lblTasaCrecimientoSeguidoresMostrar);
+		
+		lblColaboraciones = new JLabel("COLABORACIONES");
+		lblColaboraciones.setOpaque(true);
+		lblColaboraciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblColaboraciones.setFont(new Font("Agency FB", Font.BOLD, 26));
+		lblColaboraciones.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblColaboraciones.setBackground(new Color(255, 204, 102));
+		lblColaboraciones.setBounds(0, 296, 330, 40);
+		panelDatosGenerales.add(lblColaboraciones);
+		
+		lblNombreColaborador = new JLabel("Colaborador:");
+		lblNombreColaborador.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblNombreColaborador.setBackground(Color.WHITE);
+		lblNombreColaborador.setBounds(17, 367, 108, 49);
+		panelDatosGenerales.add(lblNombreColaborador);
+		
+		lblTematicaColab = new JLabel("Tematica:");
+		lblTematicaColab.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblTematicaColab.setBackground(Color.WHITE);
+		lblTematicaColab.setBounds(17, 415, 87, 49);
+		panelDatosGenerales.add(lblTematicaColab);
+		
+		lblTipoColab = new JLabel("Tipo:");
+		lblTipoColab.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblTipoColab.setBackground(Color.WHITE);
+		lblTipoColab.setBounds(17, 467, 87, 49);
+		panelDatosGenerales.add(lblTipoColab);
+		
+		lblEstadoColab = new JLabel("Estado:");
+		lblEstadoColab.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblEstadoColab.setBackground(Color.WHITE);
+		lblEstadoColab.setBounds(17, 515, 87, 49);
+		panelDatosGenerales.add(lblEstadoColab);
+		
+		lblDatosPlataforma = new JLabel("DATOS PLATAFORMA");
+		lblDatosPlataforma.setOpaque(true);
+		lblDatosPlataforma.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDatosPlataforma.setFont(new Font("Agency FB", Font.BOLD, 26));
+		lblDatosPlataforma.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblDatosPlataforma.setBackground(new Color(255, 204, 102));
+		lblDatosPlataforma.setBounds(329, 296, 330, 40);
+		panelDatosGenerales.add(lblDatosPlataforma);
+		
+		CBColaboraciones = new JComboBox();
+		CBColaboraciones.setBackground(Color.WHITE);
+		CBColaboraciones.setFont(new Font("Agency FB", Font.BOLD, 17));
+		CBColaboraciones.setBounds(178, 342, 141, 21);
+		panelDatosGenerales.add(CBColaboraciones);
+		
+		lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblUsuario.setBackground(Color.WHITE);
+		lblUsuario.setBounds(347, 367, 108, 49);
+		panelDatosGenerales.add(lblUsuario);
+		
+		lblSeguidores = new JLabel("Seguidores:");
+		lblSeguidores.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblSeguidores.setBackground(Color.WHITE);
+		lblSeguidores.setBounds(347, 428, 108, 49);
+		panelDatosGenerales.add(lblSeguidores);
+		
+		lblFcreacion = new JLabel("F.Creacion:");
+		lblFcreacion.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblFcreacion.setBackground(Color.WHITE);
+		lblFcreacion.setBounds(347, 487, 108, 49);
+		panelDatosGenerales.add(lblFcreacion);
+		
+		lblLinea = new JLabel("");
+		lblLinea.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblLinea.setBounds(329, 335, 330, 250);
+		panelDatosGenerales.add(lblLinea);
+		
+		lblColaboradorMostrar = new JLabel("");
+		lblColaboradorMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblColaboradorMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblColaboradorMostrar.setBackground(Color.WHITE);
+		lblColaboradorMostrar.setBounds(114, 367, 163, 49);
+		panelDatosGenerales.add(lblColaboradorMostrar);
+		
+		lblTematicaColabMostrar = new JLabel("");
+		lblTematicaColabMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTematicaColabMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblTematicaColabMostrar.setBackground(Color.WHITE);
+		lblTematicaColabMostrar.setBounds(114, 415, 163, 49);
+		panelDatosGenerales.add(lblTematicaColabMostrar);
+		
+		lblTipoMostrar = new JLabel("");
+		lblTipoMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTipoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblTipoMostrar.setBackground(Color.WHITE);
+		lblTipoMostrar.setBounds(114, 467, 163, 49);
+		panelDatosGenerales.add(lblTipoMostrar);
+		
+		lblEstadoMostrar = new JLabel("");
+		lblEstadoMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEstadoMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblEstadoMostrar.setBackground(Color.WHITE);
+		lblEstadoMostrar.setBounds(114, 515, 163, 49);
+		panelDatosGenerales.add(lblEstadoMostrar);
+		
+		lblUsuarioMostrar = new JLabel("");
+		lblUsuarioMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuarioMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblUsuarioMostrar.setBackground(Color.WHITE);
+		lblUsuarioMostrar.setBounds(465, 367, 163, 49);
+		panelDatosGenerales.add(lblUsuarioMostrar);
+		
+		lblSeguidoresMostrar = new JLabel("");
+		lblSeguidoresMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeguidoresMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblSeguidoresMostrar.setBackground(Color.WHITE);
+		lblSeguidoresMostrar.setBounds(465, 428, 163, 49);
+		panelDatosGenerales.add(lblSeguidoresMostrar);
+		
+		lblFCreacionMostrar = new JLabel("");
+		lblFCreacionMostrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFCreacionMostrar.setFont(new Font("Agency FB", Font.PLAIN, 22));
+		lblFCreacionMostrar.setBackground(Color.WHITE);
+		lblFCreacionMostrar.setBounds(465, 487, 163, 49);
+		panelDatosGenerales.add(lblFCreacionMostrar);
 		
 		//-------------------PANEL PUBLICACIONES------------------------------------------
 		panelPublicaciones = new JPanel();

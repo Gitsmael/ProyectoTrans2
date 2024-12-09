@@ -58,6 +58,7 @@ public class Controlador implements ActionListener, MouseListener {
 	private ArrayList <String> colabs;
 	private DefaultComboBoxModel<String> modelocombo;
 	private String id, plataformanombre;
+	private Double mediaVIG, mediaMIG, mediaVYT, mediaMYT, mediaVTK, mediaMTK, mediaVTW, mediaMTW;
 
 
 	
@@ -187,6 +188,14 @@ public class Controlador implements ActionListener, MouseListener {
                 sacarID(seleccion);
                 recorrerDatos();
             	rellenarcolab();
+      			contenidoStrong();
+      			try {
+					resumenRendimiento();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
                 cargarComboBox(vista.CBColaboraciones, colabs);
                 
                 // Actualizar la etiqueta con la selección
@@ -260,7 +269,11 @@ public class Controlador implements ActionListener, MouseListener {
       		if(e.getSource()==vista.btnYouTube) {
       			vista.lblDatosPlataforma.setText("DATOS DE YOUTUBE");
       			plataformanombre = "YouTube";
+      			
       			rellenarCamposPlataforma();
+      			calculoMedias();
+      			contenidoStrong();
+      			
 
       		}
       		//------------------------------------BOTON TWITCH------------------------------------------------
@@ -268,18 +281,24 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.lblDatosPlataforma.setText("DATOS DE TWITCH");
       			plataformanombre = "Twitch";
       			rellenarCamposPlataforma();
+      			calculoMedias();
+      			contenidoStrong();
       		}
       		//------------------------------------BOTON INSTAGRAM---------------------------------------------
       		if(e.getSource()==vista.btnInstagram) {
       			vista.lblDatosPlataforma.setText("DATOS DE INSTAGRAM");
       			plataformanombre = "Instagram";
       			rellenarCamposPlataforma();
+      			calculoMedias();
+      			contenidoStrong();
       		}
       		//------------------------------------BOTON TIKTOK------------------------------------------------
       		if(e.getSource()==vista.btnTikTok) {
       			vista.lblDatosPlataforma.setText("DATOS DE TIKTOK");
       			plataformanombre = "TikTok";
       			rellenarCamposPlataforma();
+      			calculoMedias();
+      			contenidoStrong();
       		}
       		
       		//-------------------------- DATOS GENERALES----------------------------
@@ -537,6 +556,8 @@ public class Controlador implements ActionListener, MouseListener {
 						colaborador.put("Plataforma_mas_interacciones_2023", "Youtube");
 					}
 					
+					double tasa_crecimiento2023 = ((interaccionesIg/promedioIg)+(interaccionesTk/promedioTk)+(interaccionesTw/promedioTw)+(interaccionesYt/promedioYt))/4;
+					this.vista.lblContenidoMayorRendimientoMostrar_3.setText(String.valueOf(tasa_crecimiento2023));
 				}
 
 			}
@@ -710,8 +731,7 @@ public class Controlador implements ActionListener, MouseListener {
 		}
 	
 	
-	public void contenidoStrong (List<Metrica> metricas) {
-		String id="5";
+	public void contenidoStrong () {
 		int videoStrong=0, imagenStrong=0;
 		for (int i=0; i<metricas.size();i++) {
 			if (String.valueOf(metricas.get(i).getCreador_id()).equalsIgnoreCase(id)) {
@@ -734,9 +754,10 @@ public class Controlador implements ActionListener, MouseListener {
 			}
 		}
 		if (videoStrong > imagenStrong) {
-			System.out.println("El video tiene mas rendimiento que la imagen");
+			this.vista.lblContenidoMayorRendimientoMostrar.setText("Video");
 		}else {
-			System.out.println("La imagen tiene mas rendimiento que el video");
+			this.vista.lblContenidoMayorRendimientoMostrar.setText("Imagen");
+
 		}
 		
 	}
@@ -746,7 +767,6 @@ public class Controlador implements ActionListener, MouseListener {
 	
 	
 	public void calculoMedias() {
-		String id = "5";
 		Double mediaIG=0.0, vistasIG=0.0, megustaIG=0.0;
 		Double mediaYT=0.0, vistasYT=0.0, megustaYT=0.0;
 		Double mediaTK=0.0, vistasTK=0.0, megustaTK=0.0;
@@ -779,17 +799,38 @@ public class Controlador implements ActionListener, MouseListener {
 				}
 			}
 		}
-		Double mediaVIG = vistasIG/mediaIG;
-		Double mediaMIG = megustaIG/mediaIG;
 		
-		Double mediaVYT = vistasYT/mediaYT;
-		Double mediaMYT = megustaYT/mediaYT;
+
 		
-		Double mediaVTK = vistasTK/mediaTK;
-		Double mediaMTK = megustaTK/mediaTK;
-		
-		Double mediaVTW = vistasTW/mediaTW;
-		Double mediaMTW = megustaTW/mediaTW;
+
+
+		 
+		 
+		 if (plataformanombre.equalsIgnoreCase("Youtube")) {
+			 mediaVYT = vistasYT/mediaYT;
+			 mediaMYT = megustaYT/mediaYT;
+			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMYT));
+			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVYT));
+			 
+		 }else if(plataformanombre.equalsIgnoreCase("TikTok")) {
+			 mediaVTK = vistasTK/mediaTK;
+			 mediaMTK = megustaTK/mediaTK;
+			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMTK));
+			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVTK));
+			 
+		 }else if(plataformanombre.equalsIgnoreCase("Instagram")){
+			 mediaVIG = vistasIG/mediaIG;
+			 mediaMIG = megustaIG/mediaIG;
+			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMIG));
+			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVIG));
+			 
+		 }else {
+			 mediaVTW = vistasTW/mediaTW;
+			 mediaMTW = megustaTW/mediaTW;
+			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMTW));
+			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVTW));
+			 
+		 }
 		
 		
 	}
@@ -800,6 +841,7 @@ public class Controlador implements ActionListener, MouseListener {
 		for (JsonNode creador : creadoresNode) {
 				if (creador.get("id").asText().equals(id)) {
 					this.vista.lblNombreMostrar.setText(creador.get("nombre").asText());
+					this.vista.lblCreadorMostrar.setText(creador.get("nombre").asText());
 					this.vista.lblPaisMostrar.setText(creador.get("pais").asText());
 					this.vista.lblTematicaMostrar.setText(creador.get("tematica").asText());
 					this.vista.lblSeguidoresTotalesMostrar.setText(creador.get("seguidores_totales").asText());
