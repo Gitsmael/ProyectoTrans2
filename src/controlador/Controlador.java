@@ -99,6 +99,9 @@ public class Controlador implements ActionListener, MouseListener {
 		this.vista.btnBorrarDatosModif.addActionListener(this);
 		
 		cargarComboBox(vista.comboBox, idNombres);
+		cargarComboBox(vista.CBColaboraciones, nombres);
+		cargarComboBox(vista.cbAnfitrion, idNombres);
+		cargarComboBox(vista.cbInvitado, idNombres);
 
 		
 	}
@@ -148,12 +151,7 @@ public class Controlador implements ActionListener, MouseListener {
 		
 	}
 	
-	public class ComboBoxController {
-	    public void handleSelection(String selectedItem) {
-	        System.out.println("Seleccionaste: " + selectedItem);
-	        // Agrega aquí la lógica necesaria para manejar la selección.
-	    }
-	}
+
 	
 	
 
@@ -175,10 +173,30 @@ public class Controlador implements ActionListener, MouseListener {
                 // Aquí puedes añadir la acción que desees realizar
             }
         });
+        
+        vista.CBColaboraciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // Obtener el elemento seleccionado
+                String seleccion = (String) vista.comboBox.getSelectedItem();
+                
+                sacarID(seleccion);
+                //recorrerDatos(creadoresNode, id);´
+                recorrerColaboradores(creadoresNode, seleccion);
+                
+                // Actualizar la etiqueta con la selección
+                //vista.lblNombreMostrar.setText(seleccion);
+                System.out.println(id);
+                // Aquí puedes añadir la acción que desees realizar
+            }
+        });
 
 		
       //-----------------------BOTONES MENU GENERAL
       		if(e.getSource()==vista.btnDatos) {
+    			cargarComboBox(vista.comboBox, idNombres);
+
       			vista.panelDatosGenerales.setVisible(true);
       			vista.panelDatosGenerales.enable(true);
       			vista.panelColaboraciones.setVisible(false);
@@ -366,8 +384,13 @@ public class Controlador implements ActionListener, MouseListener {
 			System.out.println(creador.get("id")+"a");
 			String idNombre = (id+" "+nombre);
 			idNombres.add(idNombre);
+			for (JsonNode colaboracion : creador.get("colaboraciones")){
+					String nombresCombo = colaboracion.get("colaborador").asText()+" - "+colaboracion.get("tematica").asText();
+					nombres.add(nombresCombo);
+				
+
+			}
 		}
-		System.out.println(idNombres);
 		
 		
 		
@@ -797,6 +820,32 @@ public class Controlador implements ActionListener, MouseListener {
 			modelo.addElement(list.get(i));
 		}
 		box.setModel(modelo);
+		
+	}
+	public void recorrerColaboradores (ArrayNode creadoresNode, String id) {
+
+		for (JsonNode creador : creadoresNode) {
+				if (creador.get("id").asText().equals(id)) {
+					for (JsonNode plataforma : creador.get("plataformas")) {
+						System.out.println(plataforma.get("nombre").asText());
+						System.out.println(plataforma.get("usuario").asText());
+						System.out.println(plataforma.get("seguidores").asText());
+						System.out.println(plataforma.get("fecha_creacion").asText());
+						for (JsonNode historial : plataforma.get("historico")) {
+							System.out.println(historial.get("fecha").asText());
+							System.out.println(historial.get("nuevos_seguidores").asText());
+							System.out.println(historial.get("interacciones").asText());
+						}
+					}
+					for (JsonNode colaboracion : creador.get("colaboraciones")){
+						
+						System.out.println(colaboracion.get("colaborador").asText()+" - "+colaboracion.get("tematica").asText());
+						System.out.println();
+						System.out.println(colaboracion.get("fecha_fin").asText());
+					}
+					System.out.println("-----------------");
+				}
+		}
 		
 	}
 
