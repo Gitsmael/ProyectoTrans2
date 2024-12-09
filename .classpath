@@ -6,19 +6,19 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías CSV-20241203/commons-beanutils-1.9.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías CSV-20241203/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías CSV-20241203/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías CSV-20241203/commons-lang3-3.12.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías CSV-20241203/opencsv-5.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-annotations-2.9.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-annotations-2.9.9-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-annotations-2.9.9-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-core-2.9.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-core-2.9.9-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-core-2.9.9-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-databind-2.9.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-databind-2.9.9-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Admin/Downloads/Librerías JSON-20241203/jackson-databind-2.9.9-sources.jar"/>
+	<classpathentry kind="lib" path="./librerias/commons-beanutils-1.9.4.jar"/>
+	<classpathentry kind="lib" path="./librerias/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="./librerias/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="./librerias/commons-lang3-3.12.0.jar"/>
+	<classpathentry kind="lib" path="./librerias/opencsv-5.6.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-annotations-2.9.9.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-annotations-2.9.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-annotations-2.9.9-sources.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-core-2.9.9.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-core-2.9.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-core-2.9.9-sources.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-databind-2.9.9.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-databind-2.9.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="./librerias/jackson-databind-2.9.9-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

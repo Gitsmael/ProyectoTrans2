@@ -1,5 +1,4 @@
 package modelo;
-
 import com.opencsv.bean.CsvBindByName;
 
 public class Metrica {
