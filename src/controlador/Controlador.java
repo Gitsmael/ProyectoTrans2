@@ -100,6 +100,18 @@ public class Controlador implements ActionListener, MouseListener {
 		this.vista.btnInsertarModif.addActionListener(this);
 		this.vista.btnBorrarDatosModif.addActionListener(this);
 		
+		//PANEL METRICAS
+		this.vista.btnMetricasRendimientoMetrica.addActionListener(this);
+		this.vista.btnCrearInformeMetrica.addActionListener(this);
+		this.vista.btnResumenRendimientoMetrica.addActionListener(this);
+		this.vista.btnVolverMetrica.addActionListener(this);
+		
+		//ESCONDER PANELES
+		
+		this.vista.panelColaboraciones.setVisible(false);
+		this.vista.panelPublicaciones.setVisible(false);
+		this.vista.panelMetricas.setVisible(false);
+		
 		cargarComboBox(vista.comboBox, idNombres);
 		cargarComboBox(vista.CBColaboraciones, nombres);
 		cargarComboBox(vista.cbAnfitrion, idNombres);
@@ -350,6 +362,19 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelEliminarPubli.setVisible(true);
       			vista.panelBotonesPublis.setVisible(false);
       			vista.btnVolverPubli.setVisible(true);
+      		}
+      		
+      		//-------------METRICAS-------------
+      		//BOTONES PANEL BOTONES
+      		if(e.getSource()==vista.btnVolverMetrica) {
+      			vista.btnVolverMetrica.setVisible(false);
+      			vista.panelBotonesMetricas.setVisible(true);
+      			vista.panelAnalisisMetricas.setVisible(false);
+      		}
+      		if(e.getSource()==vista.btnMetricasRendimientoMetrica) {
+      			vista.panelBotonesMetricas.setVisible(false);
+      			vista.btnVolverMetrica.setVisible(true);
+      			vista.panelAnalisisMetricas.setVisible(true);
       		}
 	}
 
