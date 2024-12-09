@@ -496,6 +496,9 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.panelAnalisisMetricas.setVisible(true);
       		}
       		if (e.getSource()==vista.btnCrearInformeMetrica) {
+      			vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+  				vista.lblMsgCorrecto.setText("INFORME CREADO CORRECTAMENTE");
+  				temporizador();
       			try {
 					generarJson();
 				} catch (IOException e1) {
@@ -506,6 +509,9 @@ public class Controlador implements ActionListener, MouseListener {
       		if(e.getSource()== vista.btnResumenRendimientoMetrica) {
       			try {
 					resumenRendimiento();
+					vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+	  				vista.lblMsgCorrecto.setText("RESUMEN CREADO CORRECTAMENTE");
+	  				temporizador();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -214,6 +214,16 @@ public class Vista extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 						
+								
+								lblMsgCorrecto = new JLabel("");
+								lblMsgCorrecto.setBounds(103, 130, 457, 62);
+								contentPane.add(lblMsgCorrecto);
+								lblMsgCorrecto.setFocusable(false);
+								lblMsgCorrecto.setVisible(false);
+								lblMsgCorrecto.setForeground(new Color(0, 255, 51));
+								lblMsgCorrecto.setHorizontalAlignment(SwingConstants.CENTER);
+								lblMsgCorrecto.setFont(new Font("Agency FB", Font.BOLD, 29));
+						
 						//-------------------PANEL PUBLICACIONES------------------------------------------
 						panelPublicaciones = new JPanel();
 						panelPublicaciones.setBounds(10, 98, 659, 585);
@@ -494,16 +504,6 @@ public class Vista extends JFrame {
 							tfPubliGustasInsert.setColumns(10);
 							tfPubliGustasInsert.setBounds(350, 193, 172, 19);
 							panelInsertarPubli.add(tfPubliGustasInsert);
-				
-						
-						lblMsgCorrecto = new JLabel("");
-						lblMsgCorrecto.setBounds(103, 130, 457, 62);
-						contentPane.add(lblMsgCorrecto);
-						lblMsgCorrecto.setFocusable(false);
-						lblMsgCorrecto.setVisible(false);
-						lblMsgCorrecto.setForeground(new Color(0, 255, 51));
-						lblMsgCorrecto.setHorizontalAlignment(SwingConstants.CENTER);
-						lblMsgCorrecto.setFont(new Font("Agency FB", Font.BOLD, 29));
 				
 				
 				//--------------------------------------------PANEL DATOS GENERALES---------------------------------
