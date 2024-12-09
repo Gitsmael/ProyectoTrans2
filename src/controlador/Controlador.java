@@ -56,6 +56,7 @@ public class Controlador implements ActionListener, MouseListener {
 	private ArrayList <String> contenidos;
 	private ArrayList <String> idNombres;
 	private ArrayList <String> colabs;
+	private ArrayList <String> filtros;
 	private DefaultComboBoxModel<String> modelocombo;
 	private String id, plataformanombre;
 	private Double mediaVIG, mediaMIG, mediaVYT, mediaMYT, mediaVTK, mediaMTK, mediaVTW, mediaMTW;
@@ -69,6 +70,8 @@ public class Controlador implements ActionListener, MouseListener {
 		this.nombres = new ArrayList<String> ();
 		this.contenidos = new ArrayList<String> ();
 		this.colabs = new ArrayList<String>();
+		this.filtros = new ArrayList<String>();
+
 		this.metricas = abrirCSV("files\\metricas_contenido.csv");
 		this.mapper = new ObjectMapper();
 		
@@ -122,6 +125,7 @@ public class Controlador implements ActionListener, MouseListener {
 		cargarComboBox(vista.cbAnfitrion, idNombres);
 		cargarComboBox(vista.cbInvitado, idNombres);
 		cargarComboBox(vista.cbContenidoModif, contenidos);
+		cargarComboBox(vista.cbPubliBorrar, colabs);
 		
 
 		
@@ -189,6 +193,8 @@ public class Controlador implements ActionListener, MouseListener {
                 recorrerDatos();
             	rellenarcolab();
       			contenidoStrong();
+      			promedios_MGV();
+      			mejorPlataforma ();
       			vista.lblColaboradorMostrar.setText("");
       			vista.lblTematicaColabMostrar.setText("");
       			vista.lblTipoMostrar.setText("");
@@ -291,7 +297,6 @@ public class Controlador implements ActionListener, MouseListener {
       			plataformanombre = "YouTube";
       			
       			rellenarCamposPlataforma();
-      			calculoMedias();
       			contenidoStrong();
       			
 
@@ -301,7 +306,6 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.lblDatosPlataforma.setText("DATOS DE TWITCH");
       			plataformanombre = "Twitch";
       			rellenarCamposPlataforma();
-      			calculoMedias();
       			contenidoStrong();
       		}
       		//------------------------------------BOTON INSTAGRAM---------------------------------------------
@@ -309,7 +313,6 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.lblDatosPlataforma.setText("DATOS DE INSTAGRAM");
       			plataformanombre = "Instagram";
       			rellenarCamposPlataforma();
-      			calculoMedias();
       			contenidoStrong();
       		}
       		//------------------------------------BOTON TIKTOK------------------------------------------------
@@ -317,7 +320,6 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.lblDatosPlataforma.setText("DATOS DE TIKTOK");
       			plataformanombre = "TikTok";
       			rellenarCamposPlataforma();
-      			calculoMedias();
       			contenidoStrong();
       		}
       		
@@ -471,9 +473,14 @@ public class Controlador implements ActionListener, MouseListener {
       		
       		//BOTONES ELIMINAR PUBLI
       		if(e.getSource()==vista.btnEliminarPubli) {
+      			rellenarFiltros ();
+      			cargarComboBox(vista.cbPubliBorrar, filtros);
       			vista.panelEliminarPubli.setVisible(true);
       			vista.panelBotonesPublis.setVisible(false);
       			vista.btnVolverPubli.setVisible(true);
+      		}
+      		if (e.getSource()== vista.btnBorrarPublicacion) {
+      			delMetricas ();
       		}
 
       		//-------------METRICAS-------------
@@ -812,71 +819,53 @@ public class Controlador implements ActionListener, MouseListener {
 	
 	
 	
-	public void calculoMedias() {
+	public void promedios_MGV () {
 		Double mediaIG=0.0, vistasIG=0.0, megustaIG=0.0;
 		Double mediaYT=0.0, vistasYT=0.0, megustaYT=0.0;
 		Double mediaTK=0.0, vistasTK=0.0, megustaTK=0.0;
 		Double mediaTW=0.0, vistasTW=0.0, megustaTW=0.0;
 		for (int i=0; i<metricas.size();i++) {
 			if (String.valueOf(metricas.get(i).getCreador_id()).equalsIgnoreCase(id)) {
-				if (metricas.get(i).getPlataforma().equalsIgnoreCase("Instagram")) {
 					
 					vistasIG = vistasIG+metricas.get(i).getVistas();
 					megustaIG= megustaIG+metricas.get(i).getMe_gusta();
 					mediaIG++;
 					
-				}else if (metricas.get(i).getPlataforma().equalsIgnoreCase("Youtube")){
 					
 					vistasYT = vistasYT+metricas.get(i).getVistas();
 					megustaYT= megustaYT+metricas.get(i).getMe_gusta();
 					mediaYT++;
 					
-				}else if (metricas.get(i).getPlataforma().equalsIgnoreCase("Tiktok")) {
 					
 					vistasTK = vistasTK+metricas.get(i).getVistas();
 					megustaTK= megustaTK+metricas.get(i).getMe_gusta();
 					mediaTK++;
 					
-				}else {
+			
 					
 					vistasTW = vistasTW+metricas.get(i).getVistas();
 					megustaTW= megustaTW+metricas.get(i).getMe_gusta();
 					mediaTW++;
-				}
+				
 			}
 		}
-		
-
-		
-
-
+		 mediaVYT = vistasYT/mediaYT;
+		 mediaMYT = megustaYT/mediaYT;
+		 mediaVTK = vistasTK/mediaTK;
+		 mediaMTK = megustaTK/mediaTK;
+		 mediaVIG = vistasIG/mediaIG;
+		 mediaMIG = megustaIG/mediaIG++;
+		 mediaVTW = vistasTW/mediaTW;
+		 mediaMTW = megustaTW/mediaTW;
 		 
+		 double promedio_mg = (mediaMYT +mediaMTK +mediaMIG+ mediaMTW)/4;
+		 double promedio_v = (mediaVYT +mediaVTK +mediaVIG+ mediaVTW)/4;
+
+		 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMYT));
+		 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVYT));
 		 
-		 if (plataformanombre.equalsIgnoreCase("Youtube")) {
-			 mediaVYT = vistasYT/mediaYT;
-			 mediaMYT = megustaYT/mediaYT;
-			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMYT));
-			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVYT));
 			 
-		 }else if(plataformanombre.equalsIgnoreCase("TikTok")) {
-			 mediaVTK = vistasTK/mediaTK;
-			 mediaMTK = megustaTK/mediaTK;
-			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMTK));
-			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVTK));
-			 
-		 }else if(plataformanombre.equalsIgnoreCase("Instagram")){
-			 mediaVIG = vistasIG/mediaIG;
-			 mediaMIG = megustaIG/mediaIG;
-			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMIG));
-			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVIG));
-			 
-		 }else {
-			 mediaVTW = vistasTW/mediaTW;
-			 mediaMTW = megustaTW/mediaTW;
-			 this.vista.lblTasaCrecimientoMostrar.setText(String.valueOf(mediaMTW));
-			 this.vista.lblMetricaPromedioVistasMostrar.setText(String.valueOf(mediaVTW));
-			 
-		 }
+
 		
 		
 	}
@@ -997,13 +986,31 @@ public class Controlador implements ActionListener, MouseListener {
 
 	}
 	public void delMetricas () {
+		int cantidad = Integer.parseInt(vista.textField.toString()) ;
+		String opcion = vista.cbPubliBorrar.getSelectedItem().toString();
 		for (Metrica metrica : metricas) {
-			int minimo =0;
-			String idmetrica = "1";
-			
-				if (String.valueOf(metrica.getContenido()).equalsIgnoreCase(idmetrica) && metrica.getVistas()<minimo) {
+			switch (opcion) {
+			case "Vistas":
+				if (metrica.getVistas()< cantidad) {
 					metricas.remove(metrica);
 				}
+				break;
+			case "Me gusta":
+				if (metrica.getMe_gusta()< cantidad) {
+					metricas.remove(metrica);
+				}
+				break;
+			case "Compartidos":
+				if (metrica.getCompartidos()< cantidad) {
+					metricas.remove(metrica);
+				}
+				break;
+			case "Comentarios":
+				if (metrica.getComentarios()< cantidad) {
+					metricas.remove(metrica);
+				}
+				break;
+			}
 
 
 		}
@@ -1017,16 +1024,16 @@ public class Controlador implements ActionListener, MouseListener {
 		int newId = metricas.size()+1;
 		Metrica metrica = new Metrica();
 		metrica.setCreador_id(Integer.parseInt(this.vista.tfPubliIdCreadorInsert.getText()));
-		metrica.setComentarios(Integer.parseInt(this.vista.tfPubliComentariosInsert.getText()));
-		metrica.setCompartidos(Integer.parseInt(this.vista.tfPubliCompartidosInsert.getText()));
+		metrica.setComentarios(Integer.parseInt(this.vista.tfPubliComentariosInsert.getText().toString()));
+		metrica.setCompartidos(Integer.parseInt(this.vista.tfPubliCompartidosInsert.getText().toString()));
 		metrica.setContenido("Contenido "+newId);
 		metrica.setFecha(this.vista.tfPubliFechaInsert.getText().toString());
-		metrica.setMe_gusta(Integer.parseInt(this.vista.tfPubliGustasInsert.getText()));
+		metrica.setMe_gusta(Integer.parseInt(this.vista.tfPubliGustasInsert.getText().toString()));
 		String seleccion = (String) vista.cbPubliPlataformasInsert.getSelectedItem();
 		metrica.setPlataforma( seleccion);
 		seleccion = (String) vista.cbPubliContenidoInsert.getSelectedItem();
 		metrica.setTipo(seleccion);
-		metrica.setVistas(Integer.parseInt(this.vista.tfPubliVistasInsert.getText()));
+		metrica.setVistas(Integer.parseInt(this.vista.tfPubliVistasInsert.getText().toString()));
 		
 		metricas.add(metrica);
 		
@@ -1104,6 +1111,65 @@ public class Controlador implements ActionListener, MouseListener {
 			}
 		}
 	
+	}
+	
+	
+	public void mejorPlataforma () {
+		int potenciaIG = 0, potenciaTK = 0, potenciaTW = 0, potenciaYT = 0;
+		for (JsonNode creador : creadoresNode) {
+			if (creador.get("id").asText().equals(id)) {
+				for (JsonNode plataforma : creador.get("plataformas")) {
+					if (plataforma.get("nombre").asText().equalsIgnoreCase("YouTube")) {
+						potenciaYT = plataforma.get("seguidores").asInt();
+						for (JsonNode historial : plataforma.get("historico")) {
+							potenciaYT= potenciaYT + historial.get("nuevos_seguidores").asInt();
+							potenciaYT= potenciaYT + historial.get("interacciones").asInt();
+						}
+					}else if (plataforma.get("nombre").asText().equalsIgnoreCase("TikTok")){
+						potenciaTK = plataforma.get("seguidores").asInt();
+						for (JsonNode historial : plataforma.get("historico")) {
+							potenciaTK= potenciaTK + historial.get("nuevos_seguidores").asInt();
+							potenciaTK= potenciaTK + historial.get("interacciones").asInt();
+						}
+					}else if (plataforma.get("nombre").asText().equalsIgnoreCase("Twitch")){
+						potenciaTW = plataforma.get("seguidores").asInt();
+						for (JsonNode historial : plataforma.get("historico")) {
+							potenciaTW= potenciaTW + historial.get("nuevos_seguidores").asInt();
+							potenciaTW= potenciaTW + historial.get("interacciones").asInt();
+						}
+					}else {
+						potenciaIG = plataforma.get("seguidores").asInt();
+						for (JsonNode historial : plataforma.get("historico")) {
+							potenciaIG= potenciaIG + historial.get("nuevos_seguidores").asInt();
+							potenciaIG= potenciaIG + historial.get("interacciones").asInt();
+						}
+					}
+				}
+				
+			}
+				
+		}
+		
+		if (potenciaIG> potenciaTK && potenciaIG > potenciaYT && potenciaIG> potenciaTW) {
+			this.vista.lblContenidoMayorRendimientoMostrar_1.setText("Instagram");
+		}else if (potenciaYT> potenciaTK && potenciaYT > potenciaIG && potenciaYT> potenciaTW) {
+			this.vista.lblContenidoMayorRendimientoMostrar_1.setText("YouTube");
+
+		}else if (potenciaTW> potenciaTK && potenciaTW > potenciaYT && potenciaTW> potenciaIG) {
+			this.vista.lblContenidoMayorRendimientoMostrar_1.setText("Twitch");
+
+		}else {
+			this.vista.lblContenidoMayorRendimientoMostrar_1.setText("TikTok");
+
+		}
+		
+	}
+	
+	public void rellenarFiltros () {
+		filtros.add("Vistas");
+		filtros.add("Me gusta");
+		filtros.add("Comentarios");
+		filtros.add("Compartidos");
 	}
 
 
