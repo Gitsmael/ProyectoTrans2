@@ -459,26 +459,6 @@ public class Controlador implements ActionListener, MouseListener {
 
 	}
 
-
-
-
-
-		
-		//aplicacion.colaboradorestoJson(mapper, creadoresNode); //repasar
-		//aplicacion.resumenRendimientoJson(mapper, metricas); //por hacer
-		//aplicacion.generarJson(creadoresNode, mapper); //hecho
-		//aplicacion.contenidoStrong(metricas); //hecho 2b
-		//aplicacion.calculoMedias(metricas); //hecho 2a y 9
-		//aplicacion.recorrerDatos(creadoresNode); //hecho 1
-		//aplicacion.reporteColaboraciontoCSV(creadoresNode); //hecho
-		//aplicacion.insercion(creadoresNode, metricas, mapper); //faltan cosas
-		//aplicacion.colaboracionestoCSV(creadoresNode); //hecho 4
-		//aplicacion.modMetricas(metricas); // hecho
-		//aplicacion.addMetricas(metricas, creadoresNode);
-		//idNombres = aplicacion.crearArrayComboBox(creadoresNode, idNombres);
-		//System.out.println(aplicacion.sacarID(idNombres));
-
-	
 	public void rellenarcamposcolab(String eleccion) {
 
 		String texto = eleccion;
