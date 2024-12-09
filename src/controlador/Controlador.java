@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 
@@ -77,10 +78,8 @@ public class Controlador implements ActionListener, MouseListener {
 		this.vista.btnTwitch.addActionListener(this);
 		this.vista.btnInstagram.addActionListener(this);
 		this.vista.btnTikTok.addActionListener(this);
-				
-		//PANEL DATOS GENERALES
-		this.vista.btnExportarDatosGenerales.addActionListener(this);
-				
+		
+		
 		//PANEL COLABORACIONES
 		this.vista.btnInsertarColab.addActionListener(this);
 		this.vista.btnJSONColab.addActionListener(this);
@@ -94,12 +93,30 @@ public class Controlador implements ActionListener, MouseListener {
 		this.vista.btnAniadirPubli.addActionListener(this);
 		this.vista.btnModificarPubli.addActionListener(this);
 		this.vista.btnEliminarPubli.addActionListener(this);
-		
+		this.vista.btnInsertarPubli.addActionListener(this);
+		this.vista.btnBorrarDatosPubli.addActionListener(this);
+		this.vista.btnInsertarModif.addActionListener(this);
+		this.vista.btnBorrarDatosModif.addActionListener(this);
 		
 		cargarComboBox(vista.comboBox, idNombres);
 
+		
 	}
 	
+	public void temporizador() {
+		vista.lblMsgCorrecto.setVisible(true);
+
+        // Crear un temporizador para ocultarlo después de 5 segundos
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Ocultar el JLabel
+            	vista.lblMsgCorrecto.setVisible(false);
+            	vista.lblMsgCorrecto.setBounds(103,130,457,62);
+            }
+        }, 3000); // 3000 milisegundos = 3 segundos
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -160,120 +177,157 @@ public class Controlador implements ActionListener, MouseListener {
         });
 
 		
-		//-----------------------BOTONES MENU GENERAL
-		if(e.getSource()==vista.btnDatos) {
-			cargarComboBox(vista.comboBox, idNombres);
-			
-			
-			vista.panelDatosGenerales.setVisible(true);
-			vista.panelDatosGenerales.enable(true);
-			vista.panelColaboraciones.setVisible(false);
-			vista.panelColaboraciones.enable(false);
-			vista.panelPublicaciones.setVisible(false);
-			vista.panelPublicaciones.enable(false);
-			vista.panelMetricas.setVisible(false);
-			vista.panelMetricas.enable(false);
-		}
-		if(e.getSource()==vista.btnColaboraciones) {
-			vista.panelDatosGenerales.setVisible(false);
-			vista.panelDatosGenerales.enable(false);
-			vista.panelColaboraciones.setVisible(true);
-			vista.panelColaboraciones.enable(true);
-			vista.panelBotonesColabs.setVisible(true);
-			vista.panelInsertarColab.setVisible(false);
-			vista.panelPublicaciones.setVisible(false);
-			vista.panelPublicaciones.enable(false);
-			vista.panelMetricas.setVisible(false);
-			vista.panelMetricas.enable(false);
-		}
-		if(e.getSource()==vista.btnPUBLICACIONES) {
-			vista.panelDatosGenerales.setVisible(false);
-			vista.panelDatosGenerales.enable(false);
-			vista.panelColaboraciones.setVisible(false);
-			vista.panelColaboraciones.enable(false);
-			vista.panelPublicaciones.setVisible(true);
-			vista.panelPublicaciones.enable(true);
-			vista.panelMetricas.setVisible(false);
-			vista.panelMetricas.enable(false);
-		}
-		if(e.getSource()==vista.btnMetricas) {
-			vista.panelDatosGenerales.setVisible(false);
-			vista.panelDatosGenerales.enable(false);
-			vista.panelColaboraciones.setVisible(false);
-			vista.panelColaboraciones.enable(false);
-			vista.panelPublicaciones.setVisible(false);
-			vista.panelPublicaciones.enable(false);
-			vista.panelMetricas.setVisible(true);
-			vista.panelMetricas.enable(true);
-		}
-		
-		//------------------------------------BOTON YOUTUBE-----------------------------------------------
-		if(e.getSource()==vista.btnYouTube) {
-			vista.lblDatosPlataforma.setText("DATOS DE YOUTUBE");
-		}
-		//------------------------------------BOTON TWITCH------------------------------------------------
-		if(e.getSource()==vista.btnTwitch) {
-			vista.lblDatosPlataforma.setText("DATOS DE TWITCH");
-		}
-		//------------------------------------BOTON INSTAGRAM---------------------------------------------
-		if(e.getSource()==vista.btnInstagram) {
-			vista.lblDatosPlataforma.setText("DATOS DE INSTAGRAM");
-		}
-		//------------------------------------BOTON TIKTOK------------------------------------------------
-		if(e.getSource()==vista.btnTikTok) {
-			vista.lblDatosPlataforma.setText("DATOS DE TIKTOK");
-		}
-		
-		//-------------------------- DATOS GENERALES----------------------------
-		if(e.getSource()==vista.btnExportarDatosGenerales) {
-			vista.lblMsgCorrecto.setText("DATOS EXPORTADOS CORRECTAMENTE");
-			vista.lblMsgCorrecto.setVisible(true);
-			try {
-				generarJson(creadoresNode, mapper);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-            // Crear un temporizador para ocultarlo después de 3 segundos
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    // Ocultar el JLabel
-                	vista.lblMsgCorrecto.setVisible(false);
-                }
-            }, 3000); // 3000 milisegundos = 3 segundos
-		}
-		
-		
-		//-------------------------------COLABORACIONES -------------------------
-		if(e.getSource()==vista.btnInsertarColab) {
-
-		}
-		
-		if(e.getSource()==vista.btnInsertar) {
-			vista.tfTipo.setText("");
-			vista.tfTematica.setText("");
-			vista.tfFechaInicio.setText("");
-			vista.lblMsgCorrecto.setText("COLABORACION CREADA CORRECTAMENTE");
-			vista.lblMsgCorrecto.setVisible(true);
-
-            // Crear un temporizador para ocultarlo después de 5 segundos
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    // Ocultar el JLabel
-                	vista.lblMsgCorrecto.setVisible(false);
-                }
-            }, 3000); // 3000 milisegundos = 3 segundos
-		}
-		if(e.getSource()==vista.btnBorrar) {
-			vista.tfTipo.setText("");
-			vista.tfTematica.setText("");
-			vista.tfFechaInicio.setText("");
-		}		
+      //-----------------------BOTONES MENU GENERAL
+      		if(e.getSource()==vista.btnDatos) {
+      			vista.panelDatosGenerales.setVisible(true);
+      			vista.panelDatosGenerales.enable(true);
+      			vista.panelColaboraciones.setVisible(false);
+      			vista.panelColaboraciones.enable(false);
+      			vista.panelPublicaciones.setVisible(false);
+      			vista.panelPublicaciones.enable(false);
+      			vista.panelMetricas.setVisible(false);
+      			vista.panelMetricas.enable(false);
+      		}
+      		if(e.getSource()==vista.btnColaboraciones) {
+      			vista.panelDatosGenerales.setVisible(false);
+      			vista.panelDatosGenerales.enable(false);
+      			vista.panelColaboraciones.setVisible(true);
+      			vista.panelColaboraciones.enable(true);
+      			vista.panelBotonesColabs.setVisible(true);
+      			vista.panelInsertarColab.setVisible(false);
+      			vista.panelPublicaciones.setVisible(false);
+      			vista.panelPublicaciones.enable(false);
+      			vista.panelMetricas.setVisible(false);
+      			vista.panelMetricas.enable(false);
+      		}
+      		if(e.getSource()==vista.btnPUBLICACIONES) {
+      			vista.panelDatosGenerales.setVisible(false);
+      			vista.panelDatosGenerales.enable(false);
+      			vista.panelColaboraciones.setVisible(false);
+      			vista.panelColaboraciones.enable(false);
+      			vista.panelPublicaciones.setVisible(true);
+      			vista.panelPublicaciones.enable(true);
+      			vista.panelMetricas.setVisible(false);
+      			vista.panelMetricas.enable(false);
+      		}
+      		if(e.getSource()==vista.btnMetricas) {
+      			vista.panelDatosGenerales.setVisible(false);
+      			vista.panelDatosGenerales.enable(false);
+      			vista.panelColaboraciones.setVisible(false);
+      			vista.panelColaboraciones.enable(false);
+      			vista.panelPublicaciones.setVisible(false);
+      			vista.panelPublicaciones.enable(false);
+      			vista.panelMetricas.setVisible(true);
+      			vista.panelMetricas.enable(true);
+      		}
+      		
+      		//------------------------------------BOTON YOUTUBE-----------------------------------------------
+      		if(e.getSource()==vista.btnYouTube) {
+      			vista.lblDatosPlataforma.setText("DATOS DE YOUTUBE");
+      		}
+      		//------------------------------------BOTON TWITCH------------------------------------------------
+      		if(e.getSource()==vista.btnTwitch) {
+      			vista.lblDatosPlataforma.setText("DATOS DE TWITCH");
+      		}
+      		//------------------------------------BOTON INSTAGRAM---------------------------------------------
+      		if(e.getSource()==vista.btnInstagram) {
+      			vista.lblDatosPlataforma.setText("DATOS DE INSTAGRAM");
+      		}
+      		//------------------------------------BOTON TIKTOK------------------------------------------------
+      		if(e.getSource()==vista.btnTikTok) {
+      			vista.lblDatosPlataforma.setText("DATOS DE TIKTOK");
+      		}
+      		
+      		//-------------------------- DATOS GENERALES----------------------------
+      		
+      		//-------------------------------COLABORACIONES -------------------------
+      		if(e.getSource()==vista.btnInsertarColab) {
+      			vista.panelBotonesColabs.setVisible(false);
+      			vista.panelInsertarColab.setVisible(true);
+      		}
+      		
+      		if(e.getSource()==vista.btnInsertar) {
+      			if(vista.tfTipo.getText().equals("")||vista.tfTematica.getText().equals("")||vista.tfFechaInicio.getText().equals("")) {
+      				vista.lblMsgCorrecto.setText("UNO O VARIOS CAMPOS SON INCORRECTOS");
+      				vista.lblMsgCorrecto.setForeground(new Color(255,0,0));
+      				temporizador();
+      			}else{
+      				vista.tfTipo.setText("");
+      				vista.tfTematica.setText("");
+      				vista.tfFechaInicio.setText("");
+      				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+      				vista.lblMsgCorrecto.setText("COLABORACION CREADA CORRECTAMENTE");
+      				temporizador();
+      			}
+      			
+      		}
+      		
+      		if(e.getSource()==vista.btnBorrar) {
+      			vista.tfTipo.setText("");
+      			vista.tfTematica.setText("");
+      			vista.tfFechaInicio.setText("");
+      			
+      		}
+      		if(e.getSource()==vista.btnVolverColab) {
+      			vista.panelBotonesColabs.setVisible(true);
+      			vista.panelInsertarColab.setVisible(false);
+      		}
+      		if(e.getSource()==vista.btnJSONColab) {
+      			vista.lblMsgCorrecto.setText("EXPORTACION REALIZADA CORRECTAMENTE");
+      			vista.lblMsgCorrecto.setVisible(true);
+      			vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+      			temporizador();
+      		}
+      		if(e.getSource()==vista.btnReporteColab) {
+      			vista.lblMsgCorrecto.setText("REPORTE REALIZADO CORRECTAMENTE");
+      			vista.lblMsgCorrecto.setVisible(true);
+      			vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+      			temporizador();
+      		}
+      		
+      		//-----------------------PUBLICACIONES-------------------------------------------
+      		//-------------------------- PANEL AÑADIR PUBLICACIONES-----------------
+      		if(e.getSource()==vista.btnVolverPubli) {
+      			vista.panelBotonesPublis.setVisible(true);
+      			vista.panelInsertarPubli.setVisible(false);
+      			vista.panelModificarPubli.setVisible(false);
+      			vista.panelEliminarPubli.setVisible(false);
+      			vista.btnVolverPubli.setVisible(false);
+      		}
+      		if(e.getSource()==vista.btnAniadirPubli) {
+      			vista.panelInsertarPubli.setVisible(true);
+      			vista.panelBotonesPublis.setVisible(false);
+      			vista.btnVolverPubli.setVisible(true);
+      			
+      		}
+      		if(e.getSource()==vista.btnInsertarPubli) {
+      			if(vista.tfPubliFechaInsert.getText().equals("")||vista.tfPubliIdCreadorInsert.getText().equals("")||vista.tfPubliVistasInsert.getText().equals("")||vista.tfPubliGustasInsert.getText().equals("")||vista.tfPubliComentariosInsert.getText().equals("")||vista.tfPubliComentariosInsert.getText().equals("")) {
+      				vista.lblMsgCorrecto.setText("UNO O VARIOS CAMPOS SON INCORRECTOS");
+      				vista.lblMsgCorrecto.setForeground(new Color(255,0,0));
+      				temporizador();
+      			}else{
+      				vista.tfPubliFechaInsert.setText("");
+      				vista.tfPubliIdCreadorInsert.setText("");
+      				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
+      				vista.lblMsgCorrecto.setText("PUBLICACION CREADA CORRECTAMENTE");
+      				temporizador();
+      			}
+      		}
+      		if(e.getSource()==vista.btnBorrarDatosPubli) {
+      			vista.tfPubliFechaInsert.setText("");
+      			vista.tfPubliIdCreadorInsert.setText("");
+      		}
+      		
+      		if(e.getSource()==vista.btnModificarPubli) {
+      			vista.panelModificarPubli.setVisible(true);
+      			vista.panelBotonesPublis.setVisible(false);
+      			vista.btnVolverPubli.setVisible(true);
+      		}
+      		if(e.getSource()==vista.btnEliminarPubli) {
+      			vista.panelEliminarPubli.setVisible(true);
+      			vista.panelBotonesPublis.setVisible(false);
+      			vista.btnVolverPubli.setVisible(true);
+      		}
 	}
 
 

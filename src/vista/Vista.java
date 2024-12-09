@@ -105,7 +105,36 @@ public class Vista extends JFrame {
 	public JPanel panelInsertarPubli;
 	public JPanel panelModificarPubli;
 	public JPanel panelEliminarPubli;
-	
+	public JLabel lblPubliMGModif;
+	public JLabel lblPubliComentariosModif;
+	public JLabel lblPubliContenidoModif;
+	public JComboBox cbContenidoModif;
+	public JTextField tfMGModif;
+	public JTextField tfComentariosModif;
+	public JLabel lblIDCreador;
+	public JButton btnInsertarModif;
+	public JButton btnBorrarDatosModif;
+	public JLabel lblCreadorID;
+	public JLabel lblPubliPlataforma;
+	public JLabel lblPubliFecha;
+	public JLabel lblPubliContenido;
+	public JComboBox cbPubliPlataformasInsert;
+	public String[] plataformas = {"YouTube","Twitch","Instagram","TikTok"};
+	public JComboBox cbPubliContenidoInsert;
+	public String[]contenido= {"imagen","video"};
+	public JTextField tfPubliFechaInsert;
+	public JTextField tfPubliIdCreadorInsert;
+	public JButton btnInsertarPubli;
+	public JButton btnBorrarDatosPubli;
+	public JLabel lblPubliVistas;
+	public JTextField tfPubliVistasInsert;
+	public JLabel lblPubliGustas;
+	public JLabel lblNComentarios;
+	public JTextField tfPubliComentariosInsert;
+	public JLabel lblNContenido;
+	public JTextField tfPubliCompartidosInsert;
+	public JTextField tfPubliGustasInsert;
+
 	
 	
 	
@@ -359,57 +388,17 @@ public class Vista extends JFrame {
 		
 		btnDatos = new JButton("DATOS");
 		btnDatos.setBackground(new Color(255, 255, 255));
-		btnDatos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelDatosGenerales.setVisible(true);
-				panelDatosGenerales.enable(true);
-				panelColaboraciones.setVisible(false);
-				panelColaboraciones.enable(false);
-				panelPublicaciones.setVisible(false);
-				panelPublicaciones.enable(false);
-				panelMetricas.setVisible(false);
-				panelMetricas.enable(false);
-			}
-		});
 		btnDatos.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnDatos.setBounds(30, 9, 135, 74);
 		contentPane.add(btnDatos);
 		
 		btnColaboraciones = new JButton("COLABORACIONES");
-		btnColaboraciones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelDatosGenerales.setVisible(false);
-				panelDatosGenerales.enable(false);
-				panelColaboraciones.setVisible(true);
-				panelColaboraciones.enable(true);
-				panelBotonesColabs.setVisible(true);
-				panelInsertarColab.setVisible(false);
-				panelPublicaciones.setVisible(false);
-				panelPublicaciones.enable(false);
-				panelMetricas.setVisible(false);
-				panelMetricas.enable(false);
-				
-				
-			}
-		});
 		btnColaboraciones.setBackground(new Color(255, 255, 255));
 		btnColaboraciones.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnColaboraciones.setBounds(181, 10, 135, 74);
 		contentPane.add(btnColaboraciones);
 		
 		btnPUBLICACIONES = new JButton("PUBLICACIONES");
-		btnPUBLICACIONES.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelDatosGenerales.setVisible(false);
-				panelDatosGenerales.enable(false);
-				panelColaboraciones.setVisible(false);
-				panelColaboraciones.enable(false);
-				panelPublicaciones.setVisible(true);
-				panelPublicaciones.enable(true);
-				panelMetricas.setVisible(false);
-				panelMetricas.enable(false);
-			}
-		});
 		btnPUBLICACIONES.setBackground(new Color(255, 255, 255));
 		btnPUBLICACIONES.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnPUBLICACIONES.setBounds(337, 10, 135, 74);
@@ -420,18 +409,6 @@ public class Vista extends JFrame {
 		contentPane.add(comboBox);
 		
 		btnMetricas = new JButton("METRICAS");
-		btnMetricas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelDatosGenerales.setVisible(false);
-				panelDatosGenerales.enable(false);
-				panelColaboraciones.setVisible(false);
-				panelColaboraciones.enable(false);
-				panelPublicaciones.setVisible(false);
-				panelPublicaciones.enable(false);
-				panelMetricas.setVisible(true);
-				panelMetricas.enable(true);
-			}
-		});
 		btnMetricas.setBackground(new Color(255, 255, 255));
 		btnMetricas.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnMetricas.setBounds(493, 9, 135, 74);
@@ -520,6 +497,14 @@ public class Vista extends JFrame {
 		contentPane.add(panelPublicaciones);
 		panelPublicaciones.setLayout(null);
 		
+		//a
+		btnVolverPubli = new JButton("Volver");
+		btnVolverPubli.setVisible(false);
+		btnVolverPubli.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnVolverPubli.setBackground(Color.WHITE);
+		btnVolverPubli.setBounds(559, 51, 90, 49);
+		panelPublicaciones.add(btnVolverPubli);
+		
 		lblpanelPublicaciones = new JLabel("PUBLICACIONES");
 		lblpanelPublicaciones.setBounds(0, 0, 659, 40);
 		lblpanelPublicaciones.setBackground(new Color(255, 204, 102));
@@ -528,6 +513,195 @@ public class Vista extends JFrame {
 		lblpanelPublicaciones.setFont(new Font("Agency FB", Font.BOLD, 26));
 		lblpanelPublicaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		panelPublicaciones.add(lblpanelPublicaciones);
+		
+		panelInsertarPubli = new JPanel();
+		panelInsertarPubli.setVisible(false);
+		
+		panelModificarPubli = new JPanel();
+		panelModificarPubli.setVisible(false);
+		panelModificarPubli.setBounds(0, 41, 659, 544);
+		panelPublicaciones.add(panelModificarPubli);
+		panelModificarPubli.setLayout(null);
+		
+		lblPubliMGModif = new JLabel("Nº Me gustas:");
+		lblPubliMGModif.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliMGModif.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliMGModif.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliMGModif.setBackground(Color.WHITE);
+		lblPubliMGModif.setAlignmentY(0.0f);
+		lblPubliMGModif.setBounds(231, 166, 172, 49);
+		panelModificarPubli.add(lblPubliMGModif);
+		
+		lblPubliComentariosModif = new JLabel("Nº Comentarios");
+		lblPubliComentariosModif.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliComentariosModif.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliComentariosModif.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliComentariosModif.setBackground(Color.WHITE);
+		lblPubliComentariosModif.setAlignmentY(0.0f);
+		lblPubliComentariosModif.setBounds(231, 261, 172, 49);
+		panelModificarPubli.add(lblPubliComentariosModif);
+		
+		lblPubliContenidoModif = new JLabel("Contenido");
+		lblPubliContenidoModif.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliContenidoModif.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliContenidoModif.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliContenidoModif.setBackground(Color.WHITE);
+		lblPubliContenidoModif.setAlignmentY(0.0f);
+		lblPubliContenidoModif.setBounds(231, 56, 172, 49);
+		panelModificarPubli.add(lblPubliContenidoModif);
+		
+		cbContenidoModif = new JComboBox();
+		cbContenidoModif.setBounds(231, 122, 172, 21);
+		panelModificarPubli.add(cbContenidoModif);
+		
+		tfMGModif = new JTextField();
+		tfMGModif.setBounds(231, 225, 172, 21);
+		panelModificarPubli.add(tfMGModif);
+		tfMGModif.setColumns(10);
+		
+		tfComentariosModif = new JTextField();
+		tfComentariosModif.setColumns(10);
+		tfComentariosModif.setBounds(231, 320, 172, 21);
+		panelModificarPubli.add(tfComentariosModif);
+		
+		btnInsertarModif = new JButton("CONFIRMAR");
+		btnInsertarModif.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnInsertarModif.setBackground(Color.WHITE);
+		btnInsertarModif.setBounds(151, 364, 135, 74);
+		panelModificarPubli.add(btnInsertarModif);
+		
+		btnBorrarDatosModif = new JButton("BORRAR DATOS");
+		btnBorrarDatosModif.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnBorrarDatosModif.setBackground(Color.WHITE);
+		btnBorrarDatosModif.setBounds(348, 364, 135, 74);
+		panelModificarPubli.add(btnBorrarDatosModif);
+		panelInsertarPubli.setBounds(0, 41, 659, 544);
+		panelPublicaciones.add(panelInsertarPubli);
+		panelInsertarPubli.setLayout(null);
+		
+		lblCreadorID = new JLabel("ID Creador:");
+		lblCreadorID.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreadorID.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblCreadorID.setBounds(new Rectangle(9, 0, 0, 0));
+		lblCreadorID.setBackground(Color.WHITE);
+		lblCreadorID.setAlignmentY(0.0f);
+		lblCreadorID.setBounds(85, 43, 172, 49);
+		panelInsertarPubli.add(lblCreadorID);
+		
+		lblPubliPlataforma = new JLabel("Plataforma:");
+		lblPubliPlataforma.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliPlataforma.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliPlataforma.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliPlataforma.setBackground(Color.WHITE);
+		lblPubliPlataforma.setAlignmentY(0.0f);
+		lblPubliPlataforma.setBounds(85, 133, 172, 49);
+		panelInsertarPubli.add(lblPubliPlataforma);
+		
+		lblPubliFecha = new JLabel("Fecha:");
+		lblPubliFecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliFecha.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliFecha.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliFecha.setBackground(Color.WHITE);
+		lblPubliFecha.setAlignmentY(0.0f);
+		lblPubliFecha.setBounds(85, 223, 172, 49);
+		panelInsertarPubli.add(lblPubliFecha);
+		
+		lblPubliContenido = new JLabel("Contenido:");
+		lblPubliContenido.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliContenido.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliContenido.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliContenido.setBackground(Color.WHITE);
+		lblPubliContenido.setAlignmentY(0.0f);
+		lblPubliContenido.setBounds(85, 311, 172, 49);
+		panelInsertarPubli.add(lblPubliContenido);
+		
+		cbPubliPlataformasInsert = new JComboBox(plataformas);
+		cbPubliPlataformasInsert.setBackground(Color.WHITE);
+		cbPubliPlataformasInsert.setBounds(85, 192, 172, 21);
+		panelInsertarPubli.add(cbPubliPlataformasInsert);
+		
+		cbPubliContenidoInsert = new JComboBox(contenido);
+		cbPubliContenidoInsert.setBackground(Color.WHITE);
+		cbPubliContenidoInsert.setBounds(85, 370, 172, 21);
+		panelInsertarPubli.add(cbPubliContenidoInsert);
+		
+		tfPubliFechaInsert = new JTextField();
+		tfPubliFechaInsert.setBounds(85, 282, 172, 19);
+		panelInsertarPubli.add(tfPubliFechaInsert);
+		tfPubliFechaInsert.setColumns(10);
+		
+		tfPubliIdCreadorInsert = new JTextField();
+		tfPubliIdCreadorInsert.setBounds(85, 102, 172, 21);
+		panelInsertarPubli.add(tfPubliIdCreadorInsert);
+		tfPubliIdCreadorInsert.setColumns(10);
+		
+		btnInsertarPubli = new JButton("INSERTAR");
+		btnInsertarPubli.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnInsertarPubli.setBackground(Color.WHITE);
+		btnInsertarPubli.setBounds(158, 447, 135, 74);
+		panelInsertarPubli.add(btnInsertarPubli);
+		
+		btnBorrarDatosPubli = new JButton("BORRAR DATOS");
+		btnBorrarDatosPubli.setFont(new Font("Agency FB", Font.BOLD, 16));
+		btnBorrarDatosPubli.setBackground(Color.WHITE);
+		btnBorrarDatosPubli.setBounds(350, 447, 135, 74);
+		panelInsertarPubli.add(btnBorrarDatosPubli);
+		
+		lblPubliVistas = new JLabel("Nº Vistas:");
+		lblPubliVistas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliVistas.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliVistas.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliVistas.setBackground(Color.WHITE);
+		lblPubliVistas.setAlignmentY(0.0f);
+		lblPubliVistas.setBounds(350, 43, 172, 49);
+		panelInsertarPubli.add(lblPubliVistas);
+		
+		tfPubliVistasInsert = new JTextField();
+		tfPubliVistasInsert.setColumns(10);
+		tfPubliVistasInsert.setBounds(350, 102, 172, 21);
+		panelInsertarPubli.add(tfPubliVistasInsert);
+		
+		lblPubliGustas = new JLabel("Nº Me gustas:");
+		lblPubliGustas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPubliGustas.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblPubliGustas.setBounds(new Rectangle(9, 0, 0, 0));
+		lblPubliGustas.setBackground(Color.WHITE);
+		lblPubliGustas.setAlignmentY(0.0f);
+		lblPubliGustas.setBounds(350, 133, 172, 49);
+		panelInsertarPubli.add(lblPubliGustas);
+		
+		lblNComentarios = new JLabel("Nº Comentarios");
+		lblNComentarios.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNComentarios.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblNComentarios.setBounds(new Rectangle(9, 0, 0, 0));
+		lblNComentarios.setBackground(Color.WHITE);
+		lblNComentarios.setAlignmentY(0.0f);
+		lblNComentarios.setBounds(350, 223, 172, 49);
+		panelInsertarPubli.add(lblNComentarios);
+		
+		tfPubliComentariosInsert = new JTextField();
+		tfPubliComentariosInsert.setColumns(10);
+		tfPubliComentariosInsert.setBounds(350, 282, 172, 19);
+		panelInsertarPubli.add(tfPubliComentariosInsert);
+		
+		lblNContenido = new JLabel("Nº Compartidos");
+		lblNContenido.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNContenido.setFont(new Font("Agency FB", Font.BOLD, 22));
+		lblNContenido.setBounds(new Rectangle(9, 0, 0, 0));
+		lblNContenido.setBackground(Color.WHITE);
+		lblNContenido.setAlignmentY(0.0f);
+		lblNContenido.setBounds(350, 311, 172, 49);
+		panelInsertarPubli.add(lblNContenido);
+		
+		tfPubliCompartidosInsert = new JTextField();
+		tfPubliCompartidosInsert.setColumns(10);
+		tfPubliCompartidosInsert.setBounds(350, 371, 172, 19);
+		panelInsertarPubli.add(tfPubliCompartidosInsert);
+		
+		tfPubliGustasInsert = new JTextField();
+		tfPubliGustasInsert.setColumns(10);
+		tfPubliGustasInsert.setBounds(350, 193, 172, 19);
+		panelInsertarPubli.add(tfPubliGustasInsert);
 		
 		panelBotonesPublis = new JPanel();
 		panelBotonesPublis.setLayout(null);
@@ -541,13 +715,6 @@ public class Vista extends JFrame {
 		panelBotonesPublis.add(btnEliminarPubli);
 		
 		btnAniadirPubli = new JButton("INSERTAR PUBLICACION");
-		btnAniadirPubli.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelInsertarPubli.setVisible(true);
-				panelBotonesPublis.setVisible(false);
-				btnVolverPubli.setVisible(true);
-			}
-		});
 		btnAniadirPubli.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnAniadirPubli.setBackground(Color.WHITE);
 		btnAniadirPubli.setBounds(0, 0, 200, 155);
@@ -558,31 +725,12 @@ public class Vista extends JFrame {
 		btnModificarPubli.setBackground(Color.WHITE);
 		btnModificarPubli.setBounds(257, 0, 200, 155);
 		panelBotonesPublis.add(btnModificarPubli);
-		//a
-		btnVolverPubli = new JButton("Volver");
-		btnVolverPubli.setVisible(false);
-		btnVolverPubli.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelBotonesPublis.setVisible(true);
-			}
-		});
-		btnVolverPubli.setFont(new Font("Agency FB", Font.BOLD, 16));
-		btnVolverPubli.setBackground(Color.WHITE);
-		btnVolverPubli.setBounds(559, 51, 90, 49);
-		panelPublicaciones.add(btnVolverPubli);
-		
-		panelInsertarPubli = new JPanel();
-		panelInsertarPubli.setBounds(0, 41, 659, 544);
-		panelPublicaciones.add(panelInsertarPubli);
-		
-		panelModificarPubli = new JPanel();
-		panelModificarPubli.setBounds(0, 41, 659, 544);
-		panelPublicaciones.add(panelModificarPubli);
 		
 		panelEliminarPubli = new JPanel();
+		panelEliminarPubli.setVisible(false);
 		panelEliminarPubli.setBounds(0, 41, 659, 544);
 		panelPublicaciones.add(panelEliminarPubli);
-		
+		panelEliminarPubli.setLayout(null);
 
 		
 		
@@ -607,56 +755,18 @@ public class Vista extends JFrame {
 		panelBotonesColabs.setLayout(null);
 		
 		btnJSONColab = new JButton("EXPORTAR COLABORACIONES JSON");
-		btnJSONColab.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lblMsgCorrecto.setText("EXPORTACION REALIZADA CORRECTAMENTE");
-				lblMsgCorrecto.setVisible(true);
-
-                // Crear un temporizador para ocultarlo después de 5 segundos
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // Ocultar el JLabel
-                    	lblMsgCorrecto.setVisible(false);
-                    }
-                }, 3000); // 3000 milisegundos = 3 segundos
-			}
-		});
 		btnJSONColab.setBounds(125, 197, 220, 155);
 		panelBotonesColabs.add(btnJSONColab);
 		btnJSONColab.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnJSONColab.setBackground(Color.WHITE);
 		
 		btnInsertarColab = new JButton("INSERTAR COLABORACION");
-		btnInsertarColab.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelBotonesColabs.setVisible(false);
-				panelInsertarColab.setVisible(true);
-			}
-		});
 		btnInsertarColab.setBounds(0, 0, 200, 155);
 		panelBotonesColabs.add(btnInsertarColab);
 		btnInsertarColab.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnInsertarColab.setBackground(Color.WHITE);
 		
 		btnReporteColab = new JButton("CREAR REPORTE CSV");
-		btnReporteColab.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lblMsgCorrecto.setText("REPORTE CREADO CORRECTAMENTE");
-				lblMsgCorrecto.setVisible(true);
-
-                // Crear un temporizador para ocultarlo después de 5 segundos
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // Ocultar el JLabel
-                    	lblMsgCorrecto.setVisible(false);
-                    }
-                }, 3000); // 3000 milisegundos = 3 segundos
-			}
-		});
 		btnReporteColab.setBounds(257, 0, 200, 155);
 		panelBotonesColabs.add(btnReporteColab);
 		btnReporteColab.setFont(new Font("Agency FB", Font.BOLD, 16));
@@ -739,50 +849,18 @@ public class Vista extends JFrame {
 		panelInsertarColab.add(tfTipo);
 		
 		btnInsertar = new JButton("INSERTAR");
-		btnInsertar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tfTipo.setText("");
-				tfTematica.setText("");
-				tfFechaInicio.setText("");
-				lblMsgCorrecto.setText("COLABORACION CREADA CORRECTAMENTE");
-				lblMsgCorrecto.setVisible(true);
-
-                // Crear un temporizador para ocultarlo después de 5 segundos
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // Ocultar el JLabel
-                    	lblMsgCorrecto.setVisible(false);
-                    }
-                }, 3000); // 3000 milisegundos = 3 segundos
-			}
-		});
 		btnInsertar.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnInsertar.setBackground(Color.WHITE);
 		btnInsertar.setBounds(158, 448, 135, 74);
 		panelInsertarColab.add(btnInsertar);
 		
 		btnBorrar = new JButton("BORRAR DATOS");
-		btnBorrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tfTipo.setText("");
-				tfTematica.setText("");
-				tfFechaInicio.setText("");
-			}
-		});
 		btnBorrar.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnBorrar.setBackground(Color.WHITE);
 		btnBorrar.setBounds(350, 448, 135, 74);
 		panelInsertarColab.add(btnBorrar);
 		
 		btnVolverColab = new JButton("Volver");
-		btnVolverColab.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelBotonesColabs.setVisible(true);
-				panelInsertarColab.setVisible(false);
-			}
-		});
 		btnVolverColab.setFont(new Font("Agency FB", Font.BOLD, 16));
 		btnVolverColab.setBackground(Color.WHITE);
 		btnVolverColab.setBounds(559, 10, 90, 49);
@@ -804,12 +882,19 @@ public class Vista extends JFrame {
 		lblpanelMetricas.setHorizontalAlignment(SwingConstants.CENTER);
 		panelMetricas.add(lblpanelMetricas);
 		
+		
+		
 		Fondo = new JLabel("");
 		Fondo.setBounds(0, 0, 884, 693);
 		contentPane.add(Fondo);
 		ImageIcon icoFondo = new ImageIcon(getClass().getResource("../img/fondo.jpg"));
 		ImageIcon imgFondo = new ImageIcon(icoFondo.getImage().getScaledInstance(Fondo.getWidth(),Fondo.getHeight(),Image.SCALE_SMOOTH));
 		Fondo.setIcon(imgFondo);
+		
+	
+				
+
+				
 		
 	}
 }
