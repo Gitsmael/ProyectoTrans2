@@ -63,8 +63,10 @@ public class Controlador implements ActionListener, MouseListener {
 		
 		this.vista = frame;
 		this.idNombres = new ArrayList<String>();
+		this.nombres = new ArrayList<String> ();
 		this.metricas = abrirCSV("files\\metricas_contenido.csv");
 		this.mapper = new ObjectMapper();
+		
 		crearJson();
 		crearArrayComboBox();
 		//BOTONES GENERALES
@@ -168,7 +170,7 @@ public class Controlador implements ActionListener, MouseListener {
                 recorrerDatos(creadoresNode, id);
                 
                 // Actualizar la etiqueta con la selección
-                //vista.lblNombreMostrar.setText(seleccion);
+                vista.lblNombreMostrar.setText(seleccion);
                 System.out.println(id);
                 // Aquí puedes añadir la acción que desees realizar
             }
@@ -336,11 +338,14 @@ public class Controlador implements ActionListener, MouseListener {
       			vista.tfPubliIdCreadorInsert.setText("");
       		}
       		
+      		//BOTONES MODIFICAR PUBLI
       		if(e.getSource()==vista.btnModificarPubli) {
       			vista.panelModificarPubli.setVisible(true);
       			vista.panelBotonesPublis.setVisible(false);
       			vista.btnVolverPubli.setVisible(true);
       		}
+      		
+      		//BOTONES ELIMINAR PUBLI
       		if(e.getSource()==vista.btnEliminarPubli) {
       			vista.panelEliminarPubli.setVisible(true);
       			vista.panelBotonesPublis.setVisible(false);
