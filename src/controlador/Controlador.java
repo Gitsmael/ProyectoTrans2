@@ -345,7 +345,12 @@ public class Controlador implements ActionListener, MouseListener {
       				vista.lblMsgCorrecto.setForeground(new Color(0,255,0));
       				vista.lblMsgCorrecto.setText("COLABORACION CREADA CORRECTAMENTE");
       				temporizador();
-      				insercion();
+      				try {
+						insercion();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
       			}
       			
@@ -916,7 +921,7 @@ public class Controlador implements ActionListener, MouseListener {
 	
 	
 	
-	public void insercion () {
+	public void insercion () throws JsonGenerationException, JsonMappingException, IOException {
 		String id = this.vista.cbAnfitrion.getSelectedItem().toString().split(" ")[0];
 		String id2 = this.vista.cbInvitado.getSelectedItem().toString().split(" ")[0];
 		ObjectNode colaboracionNueva = mapper.createObjectNode();
@@ -944,7 +949,7 @@ public class Controlador implements ActionListener, MouseListener {
 		}
 		
 		System.out.println(creadoresNode);
-		
+		mapper.writeValue(new File("files/creadores.json"), creadoresNode);
 	}
 	
 	public void colaboracionestoCSV () {
